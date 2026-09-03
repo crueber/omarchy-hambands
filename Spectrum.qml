@@ -96,15 +96,17 @@ Column {
           opacity: 0.25
         }
 
-        // ---- Ordinary band: segments across the band's own range ----
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
           Rectangle {
             id: seg
             required property var modelData
+            required property int index
             readonly property bool allowed: root.selectedClass === ""
               || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
+            readonly property bool first: index === 0
+            readonly property bool last: index === bandRow.modelData.segments.length - 1
 
             x: (modelData.from - bandRow.modelData.min)
                / (bandRow.modelData.max - bandRow.modelData.min) * track.width
@@ -115,8 +117,22 @@ Column {
             radius: 3
             color: root.colorFor(seg.modelData)
             opacity: seg.allowed ? 0.9 : 0.28
-            border.color: root.mutedColor
-            border.width: seg.allowed ? 0 : 1
+
+            // Only the band's far edges are rounded: a square patch hides
+              // the inner rounding on segments that continue the band.
+            Rectangle {
+              visible: seg.first && !seg.last
+              x: parent.width / 2
+              width: parent.width / 2
+              height: parent.height
+              color: parent.color
+            }
+            Rectangle {
+              visible: seg.last && !seg.first
+              width: parent.width / 2
+              height: parent.height
+              color: parent.color
+            }
 
             MouseArea {
               anchors.fill: parent

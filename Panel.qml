@@ -166,7 +166,7 @@ Panel {
     open: root.opened
     centerOnBar: String(root.setting("popupPosition", "icon")) === "center"
     focusTarget: keyCatcher
-    contentWidth: panel.fittedContentWidth(Style.space(460))
+    contentWidth: panel.fittedContentWidth(Style.space(660))
     contentHeight: panel.fittedContentHeight(content.implicitHeight)
 
     PanelKeyCatcher {
@@ -187,7 +187,6 @@ Panel {
 
           Row {
             id: brandRow
-            spacing: Style.space(7)
             anchors.left: parent.left
             Text {
               textFormat: Text.PlainText
@@ -529,53 +528,57 @@ Panel {
               }
               return out.slice(0, 40)
             }
-            delegate: Row {
+            delegate: Item {
               id: countryRow
               required property var modelData
               width: parent ? parent.width : 0
-              spacing: Style.space(7)
+              height: Style.space(20)
 
-              Rectangle {
-                width: Style.space(3)
-                height: Style.space(14)
-                radius: Style.space(2)
-                color: root.countryCode === countryRow.modelData.id ? Color.accent : Color.muted
-                opacity: root.countryCode === countryRow.modelData.id ? 0.95 : 0.4
-                anchors.verticalCenter: parent.verticalCenter
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: Style.space(30)
-                text: countryRow.modelData.id
-                color: Color.popups.text
-                font.family: Style.font.family
-                font.pixelSize: Style.space(12)
-                font.bold: root.countryCode === countryRow.modelData.id
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: countryRow.width - Style.space(30 + 54 + 24)
-                text: countryRow.modelData.name
-                color: Color.muted
-                font.family: Style.font.family
-                font.pixelSize: Style.space(12)
-                elide: Text.ElideRight
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: Style.space(54)
-                text: countryRow.modelData.bands + " rows"
-                color: Color.muted
-                font.family: Style.font.family
-                font.pixelSize: Style.space(11)
-                horizontalAlignment: Text.AlignRight
+              // The Row is a positioner: it force-places every child,
+              // so the click target lives OUTSIDE it, filling this Item.
+              Row {
+                anchors.fill: parent
+                spacing: Style.space(7)
+
+                Rectangle {
+                  width: Style.space(3)
+                  height: Style.space(14)
+                  radius: Style.space(2)
+                  color: root.countryCode === countryRow.modelData.id ? Color.accent : Color.muted
+                  opacity: root.countryCode === countryRow.modelData.id ? 0.95 : 0.4
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  width: Style.space(30)
+                  text: countryRow.modelData.id
+                  color: Color.popups.text
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(12)
+                  font.bold: root.countryCode === countryRow.modelData.id
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  width: countryRow.width - Style.space(30 + 54 + 24)
+                  text: countryRow.modelData.name
+                  color: Color.muted
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(12)
+                  elide: Text.ElideRight
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  width: Style.space(54)
+                  text: countryRow.modelData.bands + " rows"
+                  color: Color.muted
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(11)
+                  horizontalAlignment: Text.AlignRight
+                }
               }
 
-              // anchors.fill is not allowed inside a Row (the shell warns
-              // and ignores it), so size the click target by hand.
               MouseArea {
-                width: countryRow.width
-                height: countryRow.height
+                anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: root.pickCountry(countryRow.modelData.id)
               }
