@@ -11,18 +11,21 @@ dimmed rather than hidden.
 No API key, no account, no network at all: the tables are curated into the
 plugin from national regulator documents and checked by a test suite.
 
-## The two tabs
+## The popup
 
-- **Bands** — the allocation table for the chosen country. One row per
-  frequency segment on which the set of permitted classes and the mode list
-  are uniform: band name, the range, and who may use it. Tapping a class chip
-  (e.g. *Foundation*, *General*, *Klasse E*) filters the view to your
-  privileges — rows you may use keep the accent bar, rows you may not stay
-  visible but dim, because knowing what is *around* your license is half the
-  point of a table like this.
-- **Country** — a searchable picker across every country in the dataset. The
-  choice lasts until restart; the tab shows the `omarchy bar set` commands
-  that make it permanent.
+- **Bands** — the allocation chart for the chosen country. A true-scale
+  log overview (100 kHz – 300 GHz) shows every allocation at its real
+  place, then per-band detail rows show each band at full width with its
+  true range printed at right. Every segment is coloured by mode (phone,
+  data, CW). Tapping a class chip (e.g. *Foundation*, *General*,
+  *Klasse E*) filters the view to your privileges — segments you may
+  use stay lit, the rest ghost out but remain visible, because knowing
+  what is *around* your license is half the point of a chart like this.
+  Hover any stretch for the fine print (range, classes, modes, power);
+  click any band for its propagation story and segment table.
+- **Country** — a searchable picker across every country in the dataset.
+  The choice lasts until restart; the tab shows the `omarchy bar set`
+  commands that make it permanent.
 
 ## The dataset
 
@@ -133,7 +136,7 @@ omarchy restart shell
 |---|---|---|
 | Country | `country` | ISO 3166-1 alpha-2 code, e.g. `US`, `GB`, `DE`, `AU`. Blank means US |
 | Your license class | `myClass` | Class id from the country's table, e.g. `technician`, `foundation`, `e`. Blank shows every class |
-| Bar pill shows | (fixed) | Transceiver glyph + country code |
+| Bar pill shows | (fixed) | Transceiver glyph |
 | Popup position | `popupPosition` | `icon` or `center` |
 
 ## Developing locally
