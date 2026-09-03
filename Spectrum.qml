@@ -96,17 +96,45 @@ Column {
           opacity: 0.25
         }
 
+        // Rounded caps under the band's far edges. Segments are square
+        // and tile the band on top of them, so the only place a cap shows
+        property var firstSeg: bandRow.modelData.segments ? bandRow.modelData.segments[0] : null
+        property var lastSeg: bandRow.modelData.segments
+          ? bandRow.modelData.segments[bandRow.modelData.segments.length - 1] : null
+
+        Rectangle {
+          visible: track.firstSeg !== null
+          x: 0
+          width: 6
+          anchors.verticalCenter: parent.verticalCenter
+          height: parent.height - 5
+          radius: 3
+          color: track.firstSeg ? root.colorFor(track.firstSeg) : "transparent"
+          opacity: track.firstSeg && (root.selectedClass === ""
+            || (track.firstSeg.classes && track.firstSeg.classes.indexOf(root.selectedClass) >= 0))
+            ? 0.9 : 0.28
+        }
+        Rectangle {
+          visible: track.lastSeg !== null
+          x: parent.width - 6
+          width: 6
+          anchors.verticalCenter: parent.verticalCenter
+          height: parent.height - 5
+          radius: 3
+          color: track.lastSeg ? root.colorFor(track.lastSeg) : "transparent"
+          opacity: track.lastSeg && (root.selectedClass === ""
+            || (track.lastSeg.classes && track.lastSeg.classes.indexOf(root.selectedClass) >= 0))
+            ? 0.9 : 0.28
+        }
+
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
           Rectangle {
             id: seg
             required property var modelData
-            required property int index
             readonly property bool allowed: root.selectedClass === ""
               || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
-            readonly property bool first: index === 0
-            readonly property bool last: index === bandRow.modelData.segments.length - 1
 
             x: (modelData.from - bandRow.modelData.min)
                / (bandRow.modelData.max - bandRow.modelData.min) * track.width
@@ -114,25 +142,8 @@ Column {
                       / (bandRow.modelData.max - bandRow.modelData.min) * track.width)
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height - 5
-            radius: 3
             color: root.colorFor(seg.modelData)
             opacity: seg.allowed ? 0.9 : 0.28
-
-            // Only the band's far edges are rounded: a square patch hides
-              // the inner rounding on segments that continue the band.
-            Rectangle {
-              visible: seg.first && !seg.last
-              x: parent.width / 2
-              width: parent.width / 2
-              height: parent.height
-              color: parent.color
-            }
-            Rectangle {
-              visible: seg.last && !seg.first
-              width: parent.width / 2
-              height: parent.height
-              color: parent.color
-            }
 
             MouseArea {
               anchors.fill: parent
@@ -161,6 +172,33 @@ Column {
               width: (parent.width - (parent.spacing * (parent.count - 1))) / parent.count
               height: parent.height
 
+              // Edge caps under the slice's ends, same as normal bands.
+              property var firstSeg: slice.modelData.segments[0]
+              property var lastSeg: slice.modelData.segments[slice.modelData.segments.length - 1]
+
+              Rectangle {
+                x: 0
+                width: 4
+                anchors.verticalCenter: parent.verticalCenter
+                height: parent.height - 5
+                radius: 2
+                color: root.colorFor(slice.firstSeg)
+                opacity: root.selectedClass === ""
+                  || (slice.firstSeg.classes && slice.firstSeg.classes.indexOf(root.selectedClass) >= 0)
+                  ? 0.9 : 0.28
+              }
+              Rectangle {
+                x: parent.width - 4
+                width: 4
+                anchors.verticalCenter: parent.verticalCenter
+                height: parent.height - 5
+                radius: 2
+                color: root.colorFor(slice.lastSeg)
+                opacity: root.selectedClass === ""
+                  || (slice.lastSeg.classes && slice.lastSeg.classes.indexOf(root.selectedClass) >= 0)
+                  ? 0.9 : 0.28
+              }
+
               Repeater {
                 model: slice.modelData.segments
 
@@ -178,7 +216,6 @@ Column {
                                - slice.modelData.segments[0].from) * slice.width)
                   anchors.verticalCenter: parent.verticalCenter
                   height: parent.height - 5
-                  radius: 2
                   color: root.colorFor(mseg.modelData)
                   opacity: mseg.allowed ? 0.9 : 0.28
 

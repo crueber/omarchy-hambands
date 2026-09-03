@@ -4,7 +4,7 @@
   "name": "Ham Bands",
   "version": "0.2.0",
   "license": "MIT",
-  "repository": "https://github.com/Snackwrap/omarchy-hambands",
+  "repository": "https://github.com/crueber/omarchy-hambands",
   "description": "The amateur radio spectrum, drawn to scale in the Omarchy bar: every band a bar at its real place, coloured by mode, with license-class privileges, powers and caveats on hover, propagation notes on click, for 15 countries.",
   "keywords": [
     "ham radio",

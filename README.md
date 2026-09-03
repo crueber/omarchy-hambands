@@ -106,7 +106,7 @@ node tools/test-bands.mjs
 ## Install
 
 ```bash
-omarchy plugin add https://github.com/Snackwrap/omarchy-hambands.git --enable
+omarchy plugin add https://github.com/crueber/omarchy-hambands.git --enable
 omarchy bar move com.leafbox.hambands right
 ```
 
