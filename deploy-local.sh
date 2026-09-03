@@ -3,7 +3,7 @@
 # validate it. Editing files here updates the running shell after a restart.
 set -euo pipefail
 
-ID="com.leafbox.hambands"
+ID="crueber.hambands"
 SRC="$(cd "$(dirname "$0")" && pwd)"
 DEST="$HOME/.config/omarchy/plugins/$ID"
 

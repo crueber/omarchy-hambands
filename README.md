@@ -107,14 +107,14 @@ node tools/test-bands.mjs
 
 ```bash
 omarchy plugin add https://github.com/crueber/omarchy-hambands.git --enable
-omarchy bar move com.leafbox.hambands right
+omarchy bar move crueber.hambands right
 ```
 
 ## Uninstall
 
 ```bash
-omarchy plugin disable com.leafbox.hambands
-omarchy plugin remove com.leafbox.hambands
+omarchy plugin disable crueber.hambands
+omarchy plugin remove crueber.hambands
 omarchy restart shell
 ```
 
@@ -124,8 +124,8 @@ Omarchy has no settings UI for bar widgets yet — the manifest declares a
 schema for the one that is coming. Until then:
 
 ```bash
-omarchy bar set com.leafbox.hambands country DE
-omarchy bar set com.leafbox.hambands myClass e
+omarchy bar set crueber.hambands country DE
+omarchy bar set crueber.hambands myClass e
 omarchy restart shell
 ```
 
@@ -140,7 +140,7 @@ omarchy restart shell
 
 ```bash
 ./deploy-local.sh          # symlink into ~/.config/omarchy/plugins and validate
-omarchy plugin enable com.leafbox.hambands right
+omarchy plugin enable crueber.hambands right
 omarchy restart shell      # reload after each edit
 ```
 

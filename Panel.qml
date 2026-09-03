@@ -16,8 +16,8 @@ import "bandnotes.js" as Notes
 // propagation story; and the country picker.
 Panel {
   id: root
-  moduleName: "com.leafbox.hambands"
-  ipcTarget: "com.leafbox.hambands"
+  moduleName: "crueber.hambands"
+  ipcTarget: "crueber.hambands"
   manageIpc: false
 
   property var anchorItem: null
@@ -145,7 +145,11 @@ Panel {
     if (!cty || detailBand === "") return out
     var groups = bandGroups
     for (var i = 0; i < groups.length; i++) {
-      if (String(groups[i].band) === detailBand) {
+      // The µwaves row aggregates every band above 1.3 GHz; its detail
+      // page is the sum of those, each row tagged with its band name.
+      var wanted = detailBand === "\u00b5w" ? groups[i].segments[0].from > 1300000
+                 : String(groups[i].band) === detailBand
+      if (wanted) {
         for (var j = 0; j < groups[i].segments.length; j++) out.push(groups[i].segments[j])
       }
     }
@@ -188,6 +192,7 @@ Panel {
           Row {
             id: brandRow
             anchors.left: parent.left
+            spacing: Style.space(9)
             Text {
               textFormat: Text.PlainText
               text: root.glyph
@@ -323,7 +328,8 @@ Panel {
                 textFormat: Text.PlainText
                 width: detSeg.width - Style.space(10)
                 x: Style.space(10)
-                text: root.classLabel(detSeg.modelData.classes || [])
+                text: (root.detailBand === "\u00b5w" ? detSeg.modelData.band + "  ·  " : "")
+                      + root.classLabel(detSeg.modelData.classes || [])
                       + (detSeg.modelData.note ? "  ·  " + detSeg.modelData.note : "")
                 color: Color.muted
                 font.family: Style.font.family

@@ -29,6 +29,7 @@ var NOTES = {
 
 function forBand(name) {
   var want = String(name || "").toLowerCase().replace(/\s+/g, "")
+  if (want === "\u00b5w" || want === "uw" || want === "\u00b5waves") return NOTES["microwaves"]
   if (NOTES[want] !== undefined) return NOTES[want]
   if (want === "75m") return NOTES["80m"]
   if (want.indexOf("cm") > 0 || want.indexOf("mm") > 0 || want.indexOf("ghz") > 0) return NOTES["microwaves"]

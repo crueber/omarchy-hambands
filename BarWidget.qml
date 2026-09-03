@@ -7,7 +7,7 @@ import qs.Ui
 // popout-identity shim the bar expects.
 BarWidget {
   id: root
-  moduleName: "com.leafbox.hambands"
+  moduleName: "crueber.hambands"
 
   function injectPanel() {
     var target = panelLoader.item
