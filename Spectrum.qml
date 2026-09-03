@@ -10,10 +10,11 @@ import QtQuick
 // is data; if only Morse, it is CW. The class filter decides opacity, not
 // colour — a dimmed green segment still reads as phone.
 //
-// Every interior segment boundary carries a 1px gap: the track shows
-// through and the two colours never touch, which is what makes sub-band
-// edges legible. Channelised bands (60 m) have real gaps, and those are
-// left at their true width rather than bridged: the silence is the truth.
+// Interior boundaries are marked with a background-coloured TICK that runs
+// the full row height, a couple of pixels proud of the bar on each side —
+// a drawn rule, not a gap between rectangles (1px inline gaps were tried
+// and are invisible at bar scale). Channelised bands (60 m) have real
+// gaps, and those keep their true width: the silence is the truth.
 //
 // Bands above 1.3 GHz collapse into one "µwaves" row of equal slices, one
 // slice per band, so the microwave allocations stay reachable without
@@ -25,6 +26,7 @@ Column {
   property string selectedClass: ""
   property var colorFor: function (segment) { return "#3fb950" }
   property var describe: function (segment) { return "" }
+  property string dividerColor: "#111111"
   property real labelWidth: 66
   property real rowHeight: 21
   property real fontSize: 11
@@ -56,14 +58,13 @@ Column {
     return out
   }
 
-  // One segment bar: square, with a 1px gap on its left edge when it is
-  // not the band's first segment (the border between allocations).
+  // One segment bar: square, tiling its share of the band exactly.
   component SegmentBar: Rectangle {
-    // required: modelData, index; context: bandStartKhz, bandSpanKhz, barWidth
     property real baseLeft
     property real baseSpan
-    x: baseLeft + (index > 0 ? 1 : 0)
-    width: Math.max(2, baseSpan - (index > 0 ? 1 : 0))
+
+    x: baseLeft
+    width: Math.max(2, baseSpan)
     height: parent.height - 5
     anchors.verticalCenter: parent.verticalCenter
     color: root.colorFor(modelData)
@@ -78,6 +79,17 @@ Column {
       onExited: root.segmentHovered("")
       onClicked: root.bandClicked(parent.modelData.band)
     }
+  }
+
+  // A boundary tick: runs the full row height so it reads as drawn through
+  // the bar, not as a seam between two rectangles.
+  component BoundaryTick: Rectangle {
+    property real tickX
+
+    x: tickX - 1
+    width: 2
+    height: parent.height
+    color: root.dividerColor
   }
 
   Repeater {
@@ -122,50 +134,29 @@ Column {
           opacity: 0.25
         }
 
-        // Rounded caps under the band's far edges. Segments are square
-        // and tile the band on top of them, so the only place a cap shows
-        // is the corner notch — rounding belongs to the band, never to a
-        // segment boundary in the middle of it.
-        property var firstSeg: bandRow.modelData.segments ? bandRow.modelData.segments[0] : null
-        property var lastSeg: bandRow.modelData.segments
-          ? bandRow.modelData.segments[bandRow.modelData.segments.length - 1] : null
-
-        Rectangle {
-          visible: track.firstSeg !== null
-          x: 0
-          width: 6
-          anchors.verticalCenter: parent.verticalCenter
-          height: parent.height - 5
-          radius: 3
-          color: track.firstSeg ? root.colorFor(track.firstSeg) : "transparent"
-          opacity: track.firstSeg && (root.selectedClass === ""
-            || (track.firstSeg.classes && track.firstSeg.classes.indexOf(root.selectedClass) >= 0))
-            ? 0.9 : 0.28
-        }
-        Rectangle {
-          visible: track.lastSeg !== null
-          x: parent.width - 6
-          width: 6
-          anchors.verticalCenter: parent.verticalCenter
-          height: parent.height - 5
-          radius: 3
-          color: track.lastSeg ? root.colorFor(track.lastSeg) : "transparent"
-          opacity: track.lastSeg && (root.selectedClass === ""
-            || (track.lastSeg.classes && track.lastSeg.classes.indexOf(root.selectedClass) >= 0))
-            ? 0.9 : 0.28
-        }
-
         // ---- Ordinary band: segments across the band's own range ----
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
           SegmentBar {
             required property var modelData
-            required property int index
             baseLeft: (modelData.from - bandRow.modelData.min)
                       / (bandRow.modelData.max - bandRow.modelData.min) * track.width
             baseSpan: (modelData.to - modelData.from)
                       / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+          }
+        }
+
+        // Interior boundary ticks, drawn over the segments.
+        Repeater {
+          model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
+
+          BoundaryTick {
+            required property int index
+            required property var modelData
+            tickX: (modelData.from - bandRow.modelData.min)
+                   / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+            visible: index > 0
           }
         }
 
@@ -189,37 +180,24 @@ Column {
               property var lastSeg: slice.modelData.segments[slice.modelData.segments.length - 1]
               readonly property real bandSpan: slice.lastSeg.to - slice.firstSeg.from
 
-              Rectangle {
-                x: 0
-                width: 4
-                anchors.verticalCenter: parent.verticalCenter
-                height: parent.height - 5
-                radius: 2
-                color: root.colorFor(slice.firstSeg)
-                opacity: root.selectedClass === ""
-                  || (slice.firstSeg.classes && slice.firstSeg.classes.indexOf(root.selectedClass) >= 0)
-                  ? 0.9 : 0.28
-              }
-              Rectangle {
-                x: parent.width - 4
-                width: 4
-                anchors.verticalCenter: parent.verticalCenter
-                height: parent.height - 5
-                radius: 2
-                color: root.colorFor(slice.lastSeg)
-                opacity: root.selectedClass === ""
-                  || (slice.lastSeg.classes && slice.lastSeg.classes.indexOf(root.selectedClass) >= 0)
-                  ? 0.9 : 0.28
-              }
-
               Repeater {
                 model: slice.modelData.segments
 
                 SegmentBar {
                   required property var modelData
-                  required property int index
                   baseLeft: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
                   baseSpan: (modelData.to - modelData.from) / slice.bandSpan * slice.width
+                }
+              }
+
+              Repeater {
+                model: slice.modelData.segments
+
+                BoundaryTick {
+                  required property int index
+                  required property var modelData
+                  tickX: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
+                  visible: index > 0
                 }
               }
             }

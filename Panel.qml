@@ -412,6 +412,7 @@ Panel {
           Spectrum {
             width: parent.width
             bandGroups: root.bandGroups
+            dividerColor: Color.popups.background
             selectedClass: root.myClass
             colorFor: root.modeColor
             describe: root.describe
