@@ -61,7 +61,7 @@ Panel {
   function refresh() { /* static dataset — nothing to refetch */ }
 
   // ---- Bar pill ----------------------------------------------------------
-  readonly property string label: glyph + "  " + countryCode
+  readonly property string label: glyph
   readonly property string tooltip: {
     if (!cty) return "Ham bands"
     var lines = ["Ham bands — " + cty.name]
