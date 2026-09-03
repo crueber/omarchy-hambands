@@ -275,19 +275,43 @@ var DATA = {
         },
         {
           "band": "60m",
+          "from": 5330.6,
+          "to": 5333.4,
+          "classes": ["extra", "advanced", "general"],
+          "modes": ["cw", "data", "phone"],
+          "note": "Discrete channel, centre 5332.0 kHz"
+        },
+        {
+          "band": "60m",
+          "from": 5346.6,
+          "to": 5349.4,
+          "classes": ["extra", "advanced", "general"],
+          "modes": ["cw", "data", "phone"],
+          "note": "Discrete channel, centre 5348.0 kHz"
+        },
+        {
+          "band": "60m",
           "from": 5351.5,
           "to": 5366.5,
-          "classes": [
-            "extra",
-            "advanced",
-            "general"
-          ],
-          "modes": [
-            "cw",
-            "data",
-            "phone"
-          ],
-          "note": "Also four discrete channels: 5332.0, 5348.0, 5373.0, 5405.0 kHz. 100 W ERP, 2.8 kHz bandwidth"
+          "classes": ["extra", "advanced", "general"],
+          "modes": ["cw", "data", "phone"],
+          "note": "Continuous WRC-15 allocation; 100 W ERP, 2.8 kHz bandwidth"
+        },
+        {
+          "band": "60m",
+          "from": 5371.6,
+          "to": 5374.4,
+          "classes": ["extra", "advanced", "general"],
+          "modes": ["cw", "data", "phone"],
+          "note": "Discrete channel, centre 5373.0 kHz"
+        },
+        {
+          "band": "60m",
+          "from": 5403.6,
+          "to": 5406.4,
+          "classes": ["extra", "advanced", "general"],
+          "modes": ["cw", "data", "phone"],
+          "note": "Discrete channel, centre 5405.0 kHz"
         },
         {
           "band": "40m",

@@ -3,12 +3,17 @@ import Quickshell
 import qs.Commons
 import qs.Ui
 import "bands.js" as Bands
+import "bandnotes.js" as Notes
 
 // Renders the bundled allocation dataset (allocations.js + bands.js). No
 // network, no processes: the only hygiene question is what the dataset
-// itself contains, and the tests answer that. The bar pill shows the country
-// whose table is on display; the popup is a two-tab panel — the band table
-// for the chosen country and license class, and the country picker.
+// itself contains, and the tests answer that.
+//
+// The bar pill is a single antenna glyph. The popup is a two-tab panel —
+// the spectrum, where every band is a bar at its real place on a log
+// frequency axis and each segment is coloured by what it is for (phone,
+// data, CW), with hover for the fine print and a click for the band's
+// propagation story; and the country picker.
 Panel {
   id: root
   moduleName: "com.leafbox.hambands"
@@ -20,17 +25,16 @@ Panel {
   readonly property var barIdentity: hostWidget || root
 
   property string chosenView: ""
+  property string detailBand: ""
+  property string hoverText: ""
   readonly property string view: chosenView !== "" ? chosenView : "bands"
 
-  // nf-fa-microphone-alt... no: the same transceiver glyph the sibling
-  // hamradio plugin uses, written as an escape because private-use
-  // characters get stripped in transit.
-  readonly property string glyph: "\uf2db"
+  // nf-fa-broadcast-tower: the antenna the band plan belongs to. Written as
+  // an escape because private-use characters get stripped in transit.
+  readonly property string glyph: "\uf519"
 
   // ---- Country and class selection ---------------------------------------
   // The picker writes `chosenCountry`; the setting makes it survive restarts.
-  // Until Omarchy ships a settings UI the panel says which command makes the
-  // choice permanent, exactly the way the reference plugin documents its keys.
   property string chosenCountry: ""
   readonly property string countryCode: {
     var want = chosenCountry !== "" ? chosenCountry
@@ -55,9 +59,9 @@ Panel {
   function refresh() { /* static dataset — nothing to refetch */ }
 
   // ---- Bar pill ----------------------------------------------------------
-  readonly property string label: cty ? glyph + "  " + cty.id : glyph
+  readonly property string label: glyph
   readonly property string tooltip: {
-    if (!cty) return "Ham Bands"
+    if (!cty) return "Ham bands"
     var lines = ["Ham bands — " + cty.name]
     if (classKnown) lines.push(Bands.className(cty, myClass))
     if (cty.regulator) lines.push(cty.regulator.name + " · " + cty.regulator.document)
@@ -81,52 +85,19 @@ Panel {
     return out.join("\n")
   }
 
-  // ---- Table data --------------------------------------------------------
-  // The full set for the country, then the class filter decides which rows
-  // light up. Rows the class may not use stay visible but dim — the reason
-  // to look at a table that only says yes is to learn what is around you.
-  readonly property var rows: {
-    if (!cty) return []
-    var segs = Bands.segmentsFor(cty, "")
-    var groups = Bands.groupByBand(segs)
-    var out = []
-    for (var i = 0; i < groups.length; i++) {
-      var g = groups[i]
-      for (var j = 0; j < g.segments.length; j++) {
-        var s = g.segments[j]
-        var allowed = myClass === "" || (s.classes && s.classes.indexOf(myClass) >= 0)
-        out.push({
-          band: g.band, from: s.from, to: s.to,
-          first: j === 0, count: g.segments.length,
-          classes: s.classes || [],
-          modes: s.modes ? s.modes.join(", ") : "all modes",
-          note: s.note || "",
-          allowed: allowed
-        })
-      }
-    }
-    return out
-  }
-  readonly property var bandNames: {
-    var out = []
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i].first) out.push(rows[i].band)
-    }
-    return out
-  }
+  // ---- Data shaping ------------------------------------------------------
+  readonly property var bandGroups: cty ? Bands.groupByBand(Bands.segmentsFor(cty, "")) : []
   readonly property var countryRows: {
     var list = Bands.countries()
     var out = []
     for (var i = 0; i < list.length; i++) {
-      out.push({
-        id: list[i].id, name: list[i].name,
-        bands: list[i].bands ? list[i].bands.length : 0,
-        regulator: list[i].regulator ? list[i].regulator.name : ""
-      })
+      out.push({ id: list[i].id, name: list[i].name,
+                 bands: list[i].bands ? list[i].bands.length : 0 })
     }
     return out
   }
   readonly property var classRows: cty ? Bands.classesOf(cty) : []
+
   function classLabel(ids) {
     if (!cty) return ""
     var out = []
@@ -137,12 +108,48 @@ Panel {
     return out.join(", ")
   }
 
+  // Segment colour = what the segment is for, in the priority a licence
+  // reads: talk first, then send data, then Morse. No stated restriction
+  // means full privilege, so it shares phone's colour.
+  function modeColor(s) {
+    var m = s.modes
+    if (!m || !m.length) return "#3fb950"                      // phone
+    if (m.indexOf("phone") >= 0 || m.indexOf("image") >= 0) return "#3fb950"
+    if (m.indexOf("data") >= 0) return "#58a6ff"               // data
+    if (m.indexOf("cw") >= 0) return "#d29922"                 // cw
+    return "#8b949e"
+  }
+
+  function describe(s) {
+    var parts = [Bands.fmtKhz(s.from) + " – " + Bands.fmtKhz(s.to)]
+    parts.push(classLabel(s.classes || []))
+    parts.push(s.modes && s.modes.length ? s.modes.join(", ") : "all modes")
+    var text = parts.join("  ·  ")
+    if (s.note) text += "\n" + s.note
+    return text
+  }
+
   function pickCountry(id) {
     root.chosenCountry = String(id || "").toUpperCase()
     root.chosenView = "bands"
   }
   function pickClass(id) {
     root.chosenClass = root.chosenClass === id ? "" : id
+  }
+  function openBand(band) {
+    root.detailBand = String(band || "")
+    root.chosenView = "detail"
+  }
+  readonly property var detailSegments: {
+    var out = []
+    if (!cty || detailBand === "") return out
+    var groups = bandGroups
+    for (var i = 0; i < groups.length; i++) {
+      if (String(groups[i].band) === detailBand) {
+        for (var j = 0; j < groups[i].segments.length; j++) out.push(groups[i].segments[j])
+      }
+    }
+    return out
   }
   function makePermanentHint() {
     var parts = ["omarchy bar set " + root.moduleName + " country " + root.countryCode]
@@ -159,7 +166,7 @@ Panel {
     open: root.opened
     centerOnBar: String(root.setting("popupPosition", "icon")) === "center"
     focusTarget: keyCatcher
-    contentWidth: panel.fittedContentWidth(Style.space(440))
+    contentWidth: panel.fittedContentWidth(Style.space(460))
     contentHeight: panel.fittedContentHeight(content.implicitHeight)
 
     PanelKeyCatcher {
@@ -192,7 +199,7 @@ Panel {
             }
             Text {
               textFormat: Text.PlainText
-              text: "BAND ALLOCATIONS"
+              text: "HAM BANDS"
               color: Color.muted
               font.family: Style.font.family
               font.pixelSize: Style.space(11)
@@ -206,19 +213,135 @@ Panel {
             textFormat: Text.PlainText
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            text: root.cty ? root.cty.name + (root.classKnown ? " · " + Bands.className(root.cty, root.myClass) : "") : ""
+            text: root.cty
+              ? root.cty.name + (root.classKnown ? " · " + Bands.className(root.cty, root.myClass) : "")
+              : ""
             color: Color.popups.text
             font.family: Style.font.family
             font.pixelSize: Style.space(11)
           }
         }
 
+        // ---- Band detail (opened by clicking a band) ----
+        Column {
+          visible: root.view === "detail"
+          width: parent.width
+          spacing: Style.space(8)
+
+          Row {
+            width: parent.width
+
+            Text {
+              textFormat: Text.PlainText
+              text: "‹ all bands"
+              color: Color.accent
+              font.family: Style.font.family
+              font.pixelSize: Style.space(12)
+
+              MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: root.chosenView = "bands"
+              }
+            }
+          }
+
+          Text {
+            width: parent.width
+            text: {
+              if (root.detailSegments.length === 0) return root.detailBand
+              var first = root.detailSegments[0]
+              var last = root.detailSegments[root.detailSegments.length - 1]
+              return root.detailBand + "   ·   " + Bands.fmtKhz(first.from) + " to " + Bands.fmtKhz(last.to)
+            }
+            color: Color.popups.text
+            font.family: Style.font.family
+            font.pixelSize: Style.space(20)
+            font.bold: true
+          }
+
+          PanelSectionHeader {
+            text: root.cty ? root.cty.regulator.name.toUpperCase() : ""
+            foreground: Color.popups.text
+            font.letterSpacing: Style.space(2)
+          }
+
+          Text {
+            textFormat: Text.PlainText
+            width: parent.width
+            text: Notes.forBand(root.detailBand)
+            color: Color.popups.text
+            font.family: Style.font.family
+            font.pixelSize: Style.space(12)
+            wrapMode: Text.WordWrap
+            lineHeight: 1.15
+          }
+
+          PanelSeparator { foreground: Color.popups.text }
+
+          // The band's segments, fine print included: ranges, who may use
+          // them, which modes, and the power or caveat notes.
+          Repeater {
+            model: root.detailSegments
+            delegate: Column {
+              id: detSeg
+              required property var modelData
+              width: parent ? parent.width : 0
+              spacing: Style.space(1)
+
+              Row {
+                width: detSeg.width
+                spacing: Style.space(7)
+
+                Rectangle {
+                  width: Style.space(3)
+                  height: Style.space(13)
+                  radius: Style.space(2)
+                  color: root.modeColor(detSeg.modelData)
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  width: Style.space(130)
+                  text: Bands.fmtKhz(detSeg.modelData.from) + " – " + Bands.fmtKhz(detSeg.modelData.to)
+                  color: Color.popups.text
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(12)
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  width: detSeg.width - Style.space(130 + 24)
+                  text: detSeg.modelData.modes && detSeg.modelData.modes.length
+                          ? detSeg.modelData.modes.join(", ") : "all modes"
+                  color: root.modeColor(detSeg.modelData)
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(11)
+                  elide: Text.ElideRight
+                }
+              }
+              Text {
+                textFormat: Text.PlainText
+                width: detSeg.width - Style.space(10)
+                x: Style.space(10)
+                text: root.classLabel(detSeg.modelData.classes || [])
+                      + (detSeg.modelData.note ? "  ·  " + detSeg.modelData.note : "")
+                color: Color.muted
+                font.family: Style.font.family
+                font.pixelSize: Style.space(11)
+                wrapMode: Text.WordWrap
+              }
+            }
+          }
+        }
+
+        // ---- Bands / Country switch (hidden while reading a band) ----
         ButtonGroup {
+          visible: root.view !== "detail"
           options: [
             { value: "bands", label: "Bands" },
             { value: "country", label: "Country" }
           ]
-          value: root.view
+          value: root.view === "country" ? "country" : "bands"
           focusable: false
           foreground: Color.popups.text
           background: Color.popups.background
@@ -227,7 +350,7 @@ Panel {
           onChanged: function (v) { root.chosenView = v }
         }
 
-        // ---- Bands ----
+        // ---- Bands tab ----
         Column {
           visible: root.view === "bands"
           width: parent.width
@@ -244,7 +367,7 @@ Panel {
             font.letterSpacing: Style.space(2)
           }
 
-          // Class chips: tap to filter the table to one license.
+          // Class chips: tap to light up your privileges on the spectrum.
           Flow {
             width: parent.width
             spacing: Style.space(6)
@@ -279,72 +402,82 @@ Panel {
             }
           }
 
-          PanelSeparator { foreground: Color.popups.text }
+          // The spectrum. Every band at its real share of the decades.
+          Spectrum {
+            width: parent.width
+            bandGroups: root.bandGroups
+            selectedClass: root.myClass
+            colorFor: root.modeColor
+            describe: root.describe
+            inkColor: Color.popups.text
+            mutedColor: Color.muted
+            onSegmentHovered: function (text) { root.hoverText = text }
+            onBandClicked: function (band) { root.openBand(band) }
+          }
 
-          // The table: one row per uniform segment, band name only on the
-          // first row of each band.
-          Repeater {
-            model: root.rows.slice(0, 160)
-            delegate: Row {
-              id: segRow
-              required property var modelData
-              width: parent ? parent.width : 0
-              spacing: Style.space(7)
+          // Mode legend.
+          Row {
+            spacing: Style.space(10)
+            anchors.right: parent.right
 
-              Rectangle {
-                width: Style.space(3)
-                height: Style.space(14)
-                radius: Style.space(2)
-                color: segRow.modelData.allowed ? Color.accent : Color.muted
-                opacity: segRow.modelData.allowed ? 0.95 : 0.4
-                anchors.verticalCenter: parent.verticalCenter
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: Style.space(46)
-                text: segRow.modelData.first ? segRow.modelData.band : ""
-                color: Color.popups.text
-                font.family: Style.font.family
-                font.pixelSize: Style.space(12)
-                font.bold: true
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: Style.space(120)
-                text: Bands.fmtKhz(segRow.modelData.from) + " – " + Bands.fmtKhz(segRow.modelData.to)
-                color: segRow.modelData.allowed ? Color.popups.text : Color.muted
-                font.family: Style.font.family
-                font.pixelSize: Style.space(11)
-              }
-              Text {
-                textFormat: Text.PlainText
-                width: segRow.width - Style.space(46 + 120 + 24)
-                text: segRow.modelData.allowed && segRow.modelData.classes.length
-                        ? root.classLabel(segRow.modelData.classes)
-                        : segRow.modelData.modes
-                color: Color.muted
-                font.family: Style.font.family
-                font.pixelSize: Style.space(11)
-                elide: Text.ElideRight
+            Repeater {
+              model: [
+                { c: "#3fb950", t: "phone" },
+                { c: "#58a6ff", t: "data" },
+                { c: "#d29922", t: "cw" }
+              ]
+              delegate: Row {
+                required property var modelData
+                spacing: Style.space(4)
+                Rectangle {
+                  width: Style.space(8)
+                  height: Style.space(8)
+                  radius: Style.space(2)
+                  color: modelData.c
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  text: modelData.t
+                  color: Color.muted
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(10)
+                  anchors.verticalCenter: parent.verticalCenter
+                }
               }
             }
           }
 
           PanelSeparator { foreground: Color.popups.text }
 
+          // Hover inspector: the fine print of whatever the pointer is over.
+          Text {
+            textFormat: Text.PlainText
+            width: parent.width
+            height: Style.space(54)
+            text: root.hoverText !== "" ? root.hoverText
+              : "Hover a band for the fine print. Click it for the propagation story."
+            color: root.hoverText !== "" ? Color.popups.text : Color.muted
+            font.family: Style.font.family
+            font.pixelSize: Style.space(12)
+            wrapMode: Text.WordWrap
+            lineHeight: 1.1
+          }
+
           Text {
             textFormat: Text.PlainText
             visible: root.classKnown
             width: parent.width
-            text: "Rows lit in the accent colour are yours. Untick your class chip to see every license again."
+            text: "Full colour is yours — " + Bands.className(root.cty, root.myClass)
+                  + ". Dimmed segments belong to higher licences; click any band to read what it does."
             color: Color.muted
             font.family: Style.font.family
-            font.pixelSize: Style.space(11)
+            font.pixelSize: Style.space(12)
             wrapMode: Text.WordWrap
           }
         }
 
-        // ---- Country ----
+        // ---- Country tab ----
         Column {
           visible: root.view === "country"
           width: parent.width
