@@ -120,12 +120,17 @@ function topOfBand(cty, band, classId) {
   return null
 }
 
-// Human frequency formatting: kHz below 100 MHz, MHz to 1 GHz, GHz above.
+// Human frequency formatting: kHz below 100 MHz, MHz to 3 GHz, GHz above.
+// Non-integers keep one decimal — 60 m channels live at 5330.6.
+function trimNum(n) {
+  var v = Math.round(n * 10) / 10
+  return Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)
+}
 function fmtKhz(khz) {
   if (!isFinite(khz)) return "--"
-  if (khz >= 1000000) return (khz / 1000000).toFixed(khz % 1000000 === 0 ? 0 : 1) + " GHz"
-  if (khz >= 100000) return (khz / 1000).toFixed(khz % 1000 === 0 ? 0 : 1) + " MHz"
-  return String(Math.round(khz)) + " kHz"
+  if (khz >= 3000000) return trimNum(khz / 1000000) + " GHz"
+  if (khz >= 100000) return trimNum(khz / 1000) + " MHz"
+  return trimNum(khz) + " kHz"
 }
 
 // A range with one unit: "21000 – 21025 kHz", "144 – 146 MHz".
