@@ -10,8 +10,10 @@ import QtQuick
 // is data; if only Morse, it is CW. The class filter decides opacity, not
 // colour — a dimmed green segment still reads as phone.
 //
-// Channelised bands (60 m) are the reason gaps between segments are left
-// as gaps rather than bridged: the silence in the bar is the truth.
+// Every interior segment boundary carries a 1px gap: the track shows
+// through and the two colours never touch, which is what makes sub-band
+// edges legible. Channelised bands (60 m) have real gaps, and those are
+// left at their true width rather than bridged: the silence is the truth.
 //
 // Bands above 1.3 GHz collapse into one "µwaves" row of equal slices, one
 // slice per band, so the microwave allocations stay reachable without
@@ -52,6 +54,30 @@ Column {
     }
     if (micro) out.push(micro)
     return out
+  }
+
+  // One segment bar: square, with a 1px gap on its left edge when it is
+  // not the band's first segment (the border between allocations).
+  component SegmentBar: Rectangle {
+    // required: modelData, index; context: bandStartKhz, bandSpanKhz, barWidth
+    property real baseLeft
+    property real baseSpan
+    x: baseLeft + (index > 0 ? 1 : 0)
+    width: Math.max(2, baseSpan - (index > 0 ? 1 : 0))
+    height: parent.height - 5
+    anchors.verticalCenter: parent.verticalCenter
+    color: root.colorFor(modelData)
+    opacity: root.selectedClass === ""
+      || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0) ? 0.9 : 0.28
+
+    MouseArea {
+      anchors.fill: parent
+      hoverEnabled: true
+      cursorShape: Qt.PointingHandCursor
+      onEntered: root.segmentHovered(root.describe(parent.modelData))
+      onExited: root.segmentHovered("")
+      onClicked: root.bandClicked(parent.modelData.band)
+    }
   }
 
   Repeater {
@@ -98,6 +124,8 @@ Column {
 
         // Rounded caps under the band's far edges. Segments are square
         // and tile the band on top of them, so the only place a cap shows
+        // is the corner notch — rounding belongs to the band, never to a
+        // segment boundary in the middle of it.
         property var firstSeg: bandRow.modelData.segments ? bandRow.modelData.segments[0] : null
         property var lastSeg: bandRow.modelData.segments
           ? bandRow.modelData.segments[bandRow.modelData.segments.length - 1] : null
@@ -127,32 +155,17 @@ Column {
             ? 0.9 : 0.28
         }
 
+        // ---- Ordinary band: segments across the band's own range ----
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
-          Rectangle {
-            id: seg
+          SegmentBar {
             required property var modelData
-            readonly property bool allowed: root.selectedClass === ""
-              || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
-
-            x: (modelData.from - bandRow.modelData.min)
-               / (bandRow.modelData.max - bandRow.modelData.min) * track.width
-            width: Math.max(3, (modelData.to - modelData.from)
-                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width)
-            anchors.verticalCenter: parent.verticalCenter
-            height: parent.height - 5
-            color: root.colorFor(seg.modelData)
-            opacity: seg.allowed ? 0.9 : 0.28
-
-            MouseArea {
-              anchors.fill: parent
-              hoverEnabled: true
-              cursorShape: Qt.PointingHandCursor
-              onEntered: root.segmentHovered(root.describe(seg.modelData))
-              onExited: root.segmentHovered("")
-              onClicked: root.bandClicked(seg.modelData.band)
-            }
+            required property int index
+            baseLeft: (modelData.from - bandRow.modelData.min)
+                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+            baseSpan: (modelData.to - modelData.from)
+                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width
           }
         }
 
@@ -172,9 +185,9 @@ Column {
               width: (parent.width - (parent.spacing * (parent.count - 1))) / parent.count
               height: parent.height
 
-              // Edge caps under the slice's ends, same as normal bands.
               property var firstSeg: slice.modelData.segments[0]
               property var lastSeg: slice.modelData.segments[slice.modelData.segments.length - 1]
+              readonly property real bandSpan: slice.lastSeg.to - slice.firstSeg.from
 
               Rectangle {
                 x: 0
@@ -202,31 +215,11 @@ Column {
               Repeater {
                 model: slice.modelData.segments
 
-                Rectangle {
-                  id: mseg
+                SegmentBar {
                   required property var modelData
-                  readonly property bool allowed: root.selectedClass === ""
-                    || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
-
-                  x: (modelData.from - slice.modelData.segments[0].from)
-                     / (slice.modelData.segments[slice.modelData.segments.length - 1].to
-                        - slice.modelData.segments[0].from) * slice.width
-                  width: Math.max(2, (modelData.to - modelData.from)
-                            / (slice.modelData.segments[slice.modelData.segments.length - 1].to
-                               - slice.modelData.segments[0].from) * slice.width)
-                  anchors.verticalCenter: parent.verticalCenter
-                  height: parent.height - 5
-                  color: root.colorFor(mseg.modelData)
-                  opacity: mseg.allowed ? 0.9 : 0.28
-
-                  MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-                    onEntered: root.segmentHovered(root.describe(mseg.modelData))
-                    onExited: root.segmentHovered("")
-                    onClicked: root.bandClicked(mseg.modelData.band)
-                  }
+                  required property int index
+                  baseLeft: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
+                  baseSpan: (modelData.to - modelData.from) / slice.bandSpan * slice.width
                 }
               }
             }

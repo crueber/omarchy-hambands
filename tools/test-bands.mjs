@@ -22,7 +22,7 @@ function loadQmlJs(rel, expr, inject) {
 const DATA = loadQmlJs("allocations.js", "DATA")
 // bands.js reaches the dataset through QML's .import, which node does not
 // have — the loader hands it the same DATA under the same namespace.
-const bands = loadQmlJs("bands.js", "({countries, country, classesOf, className, segmentsFor, segmentsAt, bandAt, classesAt, groupByBand, topOfBand, fmtKhz})",
+const bands = loadQmlJs("bands.js", "({countries, country, classesOf, className, segmentsFor, segmentsAt, bandAt, classesAt, groupByBand, topOfBand, fmtKhz, fmtRange})",
   { Allocations: { DATA: DATA } })
 
 let failures = 0
@@ -114,6 +114,10 @@ if (us) {
 check("fmtKhz(7000)", bands.fmtKhz(7000) === "7000 kHz")
 check("fmtKhz(144500)", bands.fmtKhz(144500) === "144.5 MHz")
 check("fmtKhz(NaN)", bands.fmtKhz(NaN) === "--")
+check("fmtKhz(1240000)", bands.fmtKhz(1240000) === "1240 MHz")
+check("fmtRange(21000, 21025)", bands.fmtRange(21000, 21025) === "21000 – 21025 kHz")
+check("fmtRange(144000, 146000)", bands.fmtRange(144000, 146000) === "144 – 146 MHz")
+check("fmtRange(5330.6, 5333.4)", bands.fmtRange(5330.6, 5333.4) === "5330.6 – 5333.4 kHz")
 
 console.log(failures === 0 ? "\nall checks passed" : `\n${failures} check(s) failed`)
 process.exit(failures === 0 ? 0 : 1)

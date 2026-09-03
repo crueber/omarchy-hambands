@@ -120,15 +120,23 @@ function topOfBand(cty, band, classId) {
   return null
 }
 
-// Human kHz formatting: whole kHz below 1000 MHz, one decimal above.
+// Human frequency formatting: kHz below 100 MHz, MHz to 1 GHz, GHz above.
 function fmtKhz(khz) {
   if (!isFinite(khz)) return "--"
+  if (khz >= 1000000) return (khz / 1000000).toFixed(khz % 1000000 === 0 ? 0 : 1) + " GHz"
   if (khz >= 100000) return (khz / 1000).toFixed(khz % 1000 === 0 ? 0 : 1) + " MHz"
   return String(Math.round(khz)) + " kHz"
+}
+
+// A range with one unit: "21000 – 21025 kHz", "144 – 146 MHz".
+function fmtRange(from, to) {
+  if (!isFinite(from) || !isFinite(to)) return "--"
+  var left = fmtKhz(from)
+  return left.replace(/ (kHz|MHz|GHz)$/, "") + " – " + fmtKhz(to)
 }
 
 if (typeof module !== "undefined" && module.exports) module.exports = {
   countries: countries, country: country, classesOf: classesOf, className: className,
   segmentsFor: segmentsFor, segmentsAt: segmentsAt, bandAt: bandAt, classesAt: classesAt,
-  groupByBand: groupByBand, topOfBand: topOfBand, fmtKhz: fmtKhz
+  groupByBand: groupByBand, topOfBand: topOfBand, fmtKhz: fmtKhz, fmtRange: fmtRange
 }

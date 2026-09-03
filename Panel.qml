@@ -121,7 +121,7 @@ Panel {
   }
 
   function describe(s) {
-    var parts = [Bands.fmtKhz(s.from) + " – " + Bands.fmtKhz(s.to)]
+    var parts = [Bands.fmtRange(s.from, s.to)]
     parts.push(classLabel(s.classes || []))
     parts.push(s.modes && s.modes.length ? s.modes.join(", ") : "all modes")
     var text = parts.join("  ·  ")
@@ -286,7 +286,7 @@ Panel {
               id: detSeg
               required property var modelData
               width: parent ? parent.width : 0
-              spacing: Style.space(1)
+              spacing: Style.space(3)
 
               Row {
                 width: detSeg.width
@@ -301,20 +301,21 @@ Panel {
                 }
                 Text {
                   textFormat: Text.PlainText
-                  width: Style.space(130)
-                  text: Bands.fmtKhz(detSeg.modelData.from) + " – " + Bands.fmtKhz(detSeg.modelData.to)
+                  width: Style.space(150)
+                  text: Bands.fmtRange(detSeg.modelData.from, detSeg.modelData.to)
                   color: Color.popups.text
                   font.family: Style.font.family
                   font.pixelSize: Style.space(12)
+                  elide: Text.ElideRight
                 }
                 Text {
                   textFormat: Text.PlainText
-                  width: detSeg.width - Style.space(130 + 24)
+                  width: detSeg.width - Style.space(150 + 24)
                   text: detSeg.modelData.modes && detSeg.modelData.modes.length
                           ? detSeg.modelData.modes.join(", ") : "all modes"
                   color: root.modeColor(detSeg.modelData)
                   font.family: Style.font.family
-                  font.pixelSize: Style.space(11)
+                  font.pixelSize: Style.space(12)
                   elide: Text.ElideRight
                 }
               }
