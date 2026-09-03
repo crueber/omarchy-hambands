@@ -9,11 +9,13 @@ import "bandnotes.js" as Notes
 // network, no processes: the only hygiene question is what the dataset
 // itself contains, and the tests answer that.
 //
-// The bar pill is a single antenna glyph. The popup is a two-tab panel —
-// the spectrum, where every band is a bar at its real place on a log
-// frequency axis and each segment is coloured by what it is for (phone,
-// data, CW), with hover for the fine print and a click for the band's
-// propagation story; and the country picker.
+// The bar pill is an antenna glyph plus the country code. The popup is a
+// two-tab panel: the spectrum tab opens with a true-scale log overview
+// (every allocation at its real place from ~100 kHz to ~300 GHz), then
+// the per-band detail rows the paper charts every operator grew up with
+// — each segment coloured by what it is for (phone, data, CW), with
+// hover for the fine print and a click for the band's propagation story;
+// and the country picker.
 Panel {
   id: root
   moduleName: "crueber.hambands"
@@ -59,7 +61,7 @@ Panel {
   function refresh() { /* static dataset — nothing to refetch */ }
 
   // ---- Bar pill ----------------------------------------------------------
-  readonly property string label: glyph
+  readonly property string label: glyph + "  " + countryCode
   readonly property string tooltip: {
     if (!cty) return "Ham bands"
     var lines = ["Ham bands — " + cty.name]
@@ -98,6 +100,41 @@ Panel {
   }
   readonly property var classRows: cty ? Bands.classesOf(cty) : []
 
+  // Headline numbers for the stats strip.
+  readonly property int segCount: {
+    var n = 0
+    for (var i = 0; i < bandGroups.length; i++) n += bandGroups[i].segments.length
+    return n
+  }
+  readonly property int mineCount: {
+    if (myClass === "") return segCount
+    var n = 0
+    for (var i = 0; i < bandGroups.length; i++) {
+      var segs = bandGroups[i].segments
+      for (var j = 0; j < segs.length; j++) {
+        if (segs[j].classes && segs[j].classes.indexOf(myClass) >= 0) n++
+      }
+    }
+    return n
+  }
+  readonly property var modeCounts: {
+    var phone = 0, data = 0, cw = 0
+    for (var i = 0; i < bandGroups.length; i++) {
+      var segs = bandGroups[i].segments
+      for (var j = 0; j < segs.length; j++) {
+        var c = modeColor(segs[j])
+        if (c === phoneColor) phone++
+        else if (c === dataColor) data++
+        else if (c === cwColor) cw++
+      }
+    }
+    return { phone: phone, data: data, cw: cw }
+  }
+
+  readonly property string phoneColor: "#4caf7d"
+  readonly property string dataColor: "#5b9bd5"
+  readonly property string cwColor: "#d9a441"
+
   function classLabel(ids) {
     if (!cty) return ""
     var out = []
@@ -113,15 +150,15 @@ Panel {
   // means full privilege, so it shares phone's colour.
   function modeColor(s) {
     var m = s.modes
-    if (!m || !m.length) return "#5a9e6f"                      // phone
-    if (m.indexOf("phone") >= 0 || m.indexOf("image") >= 0) return "#5a9e6f"
-    if (m.indexOf("data") >= 0) return "#6e96c4"               // data
-    if (m.indexOf("cw") >= 0) return "#c19a56"                 // cw
+    if (!m || !m.length) return phoneColor
+    if (m.indexOf("phone") >= 0 || m.indexOf("image") >= 0) return phoneColor
+    if (m.indexOf("data") >= 0) return dataColor
+    if (m.indexOf("cw") >= 0) return cwColor
     return "#8b949e"
   }
 
   function describe(s) {
-    var parts = [Bands.fmtRange(s.from, s.to)]
+    var parts = [s.band + "  ·  " + Bands.fmtRange(s.from, s.to)]
     parts.push(classLabel(s.classes || []))
     parts.push(s.modes && s.modes.length ? s.modes.join(", ") : "all modes")
     var text = parts.join("  ·  ")
@@ -155,6 +192,24 @@ Panel {
     }
     return out
   }
+  readonly property var detailModes: {
+    var seen = {}
+    var out = []
+    for (var i = 0; i < detailSegments.length; i++) {
+      var modes = detailSegments[i].modes && detailSegments[i].modes.length
+        ? detailSegments[i].modes : ["all modes"]
+      for (var j = 0; j < modes.length; j++) {
+        if (!seen[modes[j]]) { seen[modes[j]] = true; out.push(modes[j]) }
+      }
+    }
+    return out
+  }
+  function modeDotColor(mode) {
+    if (mode === "phone" || mode === "image" || mode === "all modes") return phoneColor
+    if (mode === "data") return dataColor
+    if (mode === "cw") return cwColor
+    return "#8b949e"
+  }
   function makePermanentHint() {
     var parts = ["omarchy bar set " + root.moduleName + " country " + root.countryCode]
     if (myClass !== "") parts.push("omarchy bar set " + root.moduleName + " myClass " + myClass)
@@ -170,7 +225,7 @@ Panel {
     open: root.opened
     centerOnBar: String(root.setting("popupPosition", "icon")) === "center"
     focusTarget: keyCatcher
-    contentWidth: panel.fittedContentWidth(Style.space(660))
+    contentWidth: panel.fittedContentWidth(Style.space(680))
     contentHeight: panel.fittedContentHeight(content.implicitHeight)
 
     PanelKeyCatcher {
@@ -184,46 +239,70 @@ Panel {
         width: parent.width
         spacing: Style.space(10)
 
-        // Masthead.
-        Item {
+        // Masthead: who and where.
+        PanelHero {
           width: parent.width
-          height: brandRow.implicitHeight
-
-          Row {
-            id: brandRow
-            anchors.left: parent.left
-            spacing: Style.space(9)
-            Text {
-              textFormat: Text.PlainText
-              text: root.glyph
-              color: Color.accent
-              font.family: Style.font.family
-              font.pixelSize: Style.space(14)
-              anchors.verticalCenter: parent.verticalCenter
-            }
-            Text {
-              textFormat: Text.PlainText
-              text: "HAM BANDS"
-              color: Color.muted
-              font.family: Style.font.family
-              font.pixelSize: Style.space(11)
-              font.bold: true
-              font.letterSpacing: Style.space(3)
-              anchors.verticalCenter: parent.verticalCenter
+          foreground: Color.popups.text
+          iconComponent: Component {
+            Rectangle {
+              width: Style.space(34)
+              height: Style.space(34)
+              radius: Style.space(10)
+              color: Util.alpha(Color.accent, 0.16)
+              Text {
+                anchors.centerIn: parent
+                textFormat: Text.PlainText
+                text: root.glyph
+                color: Color.accent
+                font.family: Style.font.family
+                font.pixelSize: Style.space(16)
+              }
             }
           }
-
-          Text {
-            textFormat: Text.PlainText
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            text: root.cty
-              ? root.cty.name + (root.classKnown ? " · " + Bands.className(root.cty, root.myClass) : "")
-              : ""
-            color: Color.popups.text
-            font.family: Style.font.family
-            font.pixelSize: Style.space(11)
+          title: root.cty ? root.cty.name : "Ham bands"
+          meta: {
+            if (!root.cty) return ""
+            var m = root.cty.regulator ? root.cty.regulator.name.toUpperCase() : ""
+            if (root.classKnown) m += "  ·  " + Bands.className(root.cty, root.myClass).toUpperCase()
+            else m += "  ·  ALL CLASSES"
+            return m
           }
+          detail: root.countryCode
+        }
+
+        // Stats strip: the shape of this country's table at a glance.
+        Row {
+          width: parent.width
+          spacing: Style.space(18)
+          Repeater {
+            model: [
+              { v: String(root.bandGroups.length), l: "BANDS" },
+              { v: String(root.segCount), l: "SEGMENTS" },
+              { v: root.myClass === "" ? "ALL" : (String(root.mineCount) + " / " + String(root.segCount)), l: root.classKnown ? "YOUR SEGMENTS" : "PRIVILEGES" }
+            ]
+            delegate: Column {
+              required property var modelData
+              spacing: 0
+              Text {
+                textFormat: Text.PlainText
+                text: modelData.v
+                color: Color.popups.text
+                font.family: Style.font.family
+                font.pixelSize: Style.space(17)
+                font.bold: true
+              }
+              Text {
+                textFormat: Text.PlainText
+                text: modelData.l
+                color: Color.muted
+                font.family: Style.font.family
+                font.pixelSize: Style.space(9)
+                font.bold: true
+                font.letterSpacing: 1.4
+              }
+            }
+          }
+          Item { width: 1; height: 1 }
         }
 
         // ---- Band detail (opened by clicking a band) ----
@@ -234,14 +313,12 @@ Panel {
 
           Row {
             width: parent.width
-
             Text {
               textFormat: Text.PlainText
               text: "‹ all bands"
               color: Color.accent
               font.family: Style.font.family
               font.pixelSize: Style.space(12)
-
               MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
@@ -260,25 +337,64 @@ Panel {
             }
             color: Color.popups.text
             font.family: Style.font.family
-            font.pixelSize: Style.space(20)
+            font.pixelSize: Style.space(22)
             font.bold: true
           }
 
-          PanelSectionHeader {
-            text: root.cty ? root.cty.regulator.name.toUpperCase() : ""
-            foreground: Color.popups.text
-            font.letterSpacing: Style.space(2)
+          // Mode pills: what lives on this band.
+          Flow {
+            width: parent.width
+            spacing: Style.space(6)
+            Repeater {
+              model: root.detailModes
+              delegate: Row {
+                required property var modelData
+                spacing: Style.space(5)
+                Rectangle {
+                  width: Style.space(9)
+                  height: Style.space(9)
+                  radius: Style.space(5)
+                  color: root.modeDotColor(modelData)
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+                Text {
+                  textFormat: Text.PlainText
+                  text: modelData
+                  color: Color.popups.text
+                  font.family: Style.font.family
+                  font.pixelSize: Style.space(11)
+                  anchors.verticalCenter: parent.verticalCenter
+                }
+              }
+            }
           }
 
-          Text {
-            textFormat: Text.PlainText
+          BorderSurface {
+            id: propCard
             width: parent.width
-            text: Notes.forBand(root.detailBand)
-            color: Color.popups.text
-            font.family: Style.font.family
-            font.pixelSize: Style.space(12)
-            wrapMode: Text.WordWrap
-            lineHeight: 1.15
+            radius: Style.cornerRadius
+            padding: Style.space(10)
+            color: Qt.rgba(1, 1, 1, 0.04)
+            borderSpec: Border.controlSpec("normal", Color.popups.text, Color.accent)
+            height: propCol.implicitHeight + propCard.contentTopInset + propCard.contentBottomInset
+            Column {
+              id: propCol
+              width: parent.width - propCard.contentLeftInset - propCard.contentRightInset
+              x: propCard.contentLeftInset
+              y: propCard.contentTopInset
+              spacing: 0
+              Text {
+                textFormat: Text.PlainText
+                width: parent.width
+                text: Notes.forBand(root.detailBand) !== "" ? Notes.forBand(root.detailBand)
+                      : "No propagation notes for this band yet."
+                color: Color.popups.text
+                font.family: Style.font.family
+                font.pixelSize: Style.space(12)
+                wrapMode: Text.WordWrap
+                lineHeight: 1.25
+              }
+            }
           }
 
           PanelSeparator { foreground: Color.popups.text }
@@ -298,9 +414,9 @@ Panel {
                 spacing: Style.space(7)
 
                 Rectangle {
-                  width: Style.space(3)
-                  height: Style.space(13)
-                  radius: Style.space(2)
+                  width: Style.space(8)
+                  height: Style.space(8)
+                  radius: Style.space(4)
                   color: root.modeColor(detSeg.modelData)
                   anchors.verticalCenter: parent.verticalCenter
                 }
@@ -362,17 +478,6 @@ Panel {
           width: parent.width
           spacing: Style.space(8)
 
-          PanelSectionHeader {
-            text: {
-              if (!root.cty) return "NO COUNTRY"
-              var head = root.cty.regulator.name.toUpperCase()
-              if (root.classKnown) head += "  ·  " + Bands.className(root.cty, root.myClass).toUpperCase()
-              return head
-            }
-            foreground: Color.popups.text
-            font.letterSpacing: Style.space(2)
-          }
-
           // Class chips: tap to light up your privileges on the spectrum.
           Flow {
             width: parent.width
@@ -384,12 +489,13 @@ Panel {
                 id: chip
                 required property var modelData
                 readonly property bool active: root.myClass === modelData.id
-                radius: Style.space(8)
-                color: active ? Color.accent : "transparent"
+                radius: Style.space(9)
+                color: active ? Color.accent : (chipMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.09) : Qt.rgba(1, 1, 1, 0.04))
                 border.color: active ? Color.accent : Color.muted
                 border.width: 1
-                height: classText.implicitHeight + Style.space(8)
-                width: classText.implicitWidth + Style.space(14)
+                height: classText.implicitHeight + Style.space(9)
+                width: classText.implicitWidth + Style.space(16)
+                Behavior on color { ColorAnimation { duration: 140 } }
                 Text {
                   id: classText
                   anchors.centerIn: parent
@@ -398,9 +504,12 @@ Panel {
                   color: chip.active ? Color.popups.background : Color.popups.text
                   font.family: Style.font.family
                   font.pixelSize: Style.space(11)
+                  font.bold: chip.active
                 }
                 MouseArea {
+                  id: chipMouse
                   anchors.fill: parent
+                  hoverEnabled: true
                   cursorShape: Qt.PointingHandCursor
                   onClicked: root.pickClass(chip.modelData.id)
                 }
@@ -408,7 +517,40 @@ Panel {
             }
           }
 
-          // The spectrum. Every band at its real share of the decades.
+          PanelSectionHeader {
+            text: "TRUE SCALE  ·  100 KHZ – 300 GHZ"
+            foreground: Color.popups.text
+            font.letterSpacing: Style.space(2)
+          }
+
+          // The whole allocation at its real share of the spectrum.
+          OverviewSpectrum {
+            width: parent.width
+            bandGroups: root.bandGroups
+            selectedClass: root.myClass
+            colorFor: root.modeColor
+            describe: root.describe
+            inkColor: Color.popups.text
+            mutedColor: Color.muted
+            fontFamily: Style.font.family
+            labelSize: Style.space(11)
+            onSegmentHovered: function (text) { root.hoverText = text }
+            onBandClicked: function (band) { root.openBand(band) }
+          }
+
+          PanelSectionHeader {
+            text: {
+              if (!root.cty) return "NO COUNTRY"
+              var head = "PER-BAND DETAIL"
+              if (root.classKnown) head += "  ·  " + Bands.className(root.cty, root.myClass).toUpperCase()
+              return head
+            }
+            foreground: Color.popups.text
+            font.letterSpacing: Style.space(2)
+          }
+
+          // The spectrum, band by band. Every band at full width so each
+          // segment stays legible; true ranges printed at right.
           Spectrum {
             width: parent.width
             bandGroups: root.bandGroups
@@ -416,30 +558,32 @@ Panel {
             selectedClass: root.myClass
             colorFor: root.modeColor
             describe: root.describe
+            rangeFor: Bands.fmtRange
             inkColor: Color.popups.text
             mutedColor: Color.muted
+            fontFamily: Style.font.family
             onSegmentHovered: function (text) { root.hoverText = text }
             onBandClicked: function (band) { root.openBand(band) }
           }
 
-          // Mode legend.
+          // Mode legend, with segment counts.
           Row {
-            spacing: Style.space(10)
+            spacing: Style.space(12)
             anchors.right: parent.right
 
             Repeater {
               model: [
-                { c: "#5a9e6f", t: "phone" },
-                { c: "#6e96c4", t: "data" },
-                { c: "#c19a56", t: "cw" }
+                { c: root.phoneColor, t: "phone · " + root.modeCounts.phone },
+                { c: root.dataColor, t: "data · " + root.modeCounts.data },
+                { c: root.cwColor, t: "cw · " + root.modeCounts.cw }
               ]
               delegate: Row {
                 required property var modelData
-                spacing: Style.space(4)
+                spacing: Style.space(5)
                 Rectangle {
-                  width: Style.space(8)
-                  height: Style.space(8)
-                  radius: Style.space(2)
+                  width: Style.space(9)
+                  height: Style.space(9)
+                  radius: Style.space(3)
                   color: modelData.c
                   anchors.verticalCenter: parent.verticalCenter
                 }
@@ -455,20 +599,58 @@ Panel {
             }
           }
 
-          PanelSeparator { foreground: Color.popups.text }
-
           // Hover inspector: the fine print of whatever the pointer is over.
-          Text {
-            textFormat: Text.PlainText
+          BorderSurface {
+            id: inspCard
             width: parent.width
-            height: Style.space(54)
-            text: root.hoverText !== "" ? root.hoverText
-              : "Hover a band for the fine print. Click it for the propagation story."
-            color: root.hoverText !== "" ? Color.popups.text : Color.muted
-            font.family: Style.font.family
-            font.pixelSize: Style.space(12)
-            wrapMode: Text.WordWrap
-            lineHeight: 1.1
+            radius: Style.cornerRadius
+            padding: Style.space(10)
+            color: root.hoverText !== "" ? Qt.rgba(1, 1, 1, 0.05) : "transparent"
+            borderSpec: Border.controlSpec("normal", Color.popups.text, Color.accent)
+            height: inspCol.implicitHeight + inspCard.contentTopInset + inspCard.contentBottomInset
+            Column {
+              id: inspCol
+              width: parent.width - inspCard.contentLeftInset - inspCard.contentRightInset
+              x: inspCard.contentLeftInset
+              y: inspCard.contentTopInset
+              spacing: Style.space(4)
+              Text {
+                textFormat: Text.PlainText
+                width: parent.width
+                text: {
+                  var lines = String(root.hoverText !== "" ? root.hoverText
+                    : "Hover any stretch for the fine print — range, who may use it, modes, power.").split("\n")
+                  return lines[0]
+                }
+                color: root.hoverText !== "" ? Color.popups.text : Color.muted
+                font.family: Style.font.family
+                font.pixelSize: Style.space(12)
+                font.bold: root.hoverText !== ""
+                wrapMode: Text.WordWrap
+              }
+              Text {
+                textFormat: Text.PlainText
+                visible: root.hoverText !== "" && root.hoverText.indexOf("\n") >= 0
+                width: parent.width
+                text: {
+                  var i = root.hoverText.indexOf("\n")
+                  return i >= 0 ? root.hoverText.slice(i + 1) : ""
+                }
+                color: Color.muted
+                font.family: Style.font.family
+                font.pixelSize: Style.space(11)
+                wrapMode: Text.WordWrap
+              }
+              Text {
+                textFormat: Text.PlainText
+                visible: root.hoverText === ""
+                width: parent.width
+                text: "Click any band for its propagation story."
+                color: Color.muted
+                font.family: Style.font.family
+                font.pixelSize: Style.space(11)
+              }
+            }
           }
 
           Text {
@@ -476,7 +658,7 @@ Panel {
             visible: root.classKnown
             width: parent.width
             text: "Full colour is yours — " + Bands.className(root.cty, root.myClass)
-                  + ". Dimmed segments belong to higher licences; click any band to read what it does."
+                  + " (" + root.mineCount + " of " + root.segCount + " segments). Dimmed stretches belong to higher licences."
             color: Color.muted
             font.family: Style.font.family
             font.pixelSize: Style.space(12)
@@ -496,38 +678,17 @@ Panel {
             font.letterSpacing: Style.space(2)
           }
 
-          Rectangle {
+          TextField {
+            id: countryFilter
             width: parent.width
-            height: search.implicitHeight + Style.space(12)
-            radius: Style.space(8)
-            color: Color.popups.background
-            border.color: Color.muted
-            border.width: 1
-
-            TextInput {
-              id: search
-              anchors.fill: parent
-              anchors.margins: Style.space(6)
-              color: Color.popups.text
-              font.family: Style.font.family
-              font.pixelSize: Style.space(13)
-              clip: true
-              Text {
-                visible: search.text === "" && !search.activeFocus
-                anchors.fill: parent
-                verticalAlignment: Text.AlignVCenter
-                textFormat: Text.PlainText
-                text: "Filter countries…"
-                color: Color.muted
-                font.family: Style.font.family
-                font.pixelSize: Style.space(13)
-              }
-            }
+            placeholderText: "Filter countries…"
+            foreground: Color.popups.text
+            accent: Color.accent
           }
 
           Repeater {
             model: {
-              var q = search.text.toLowerCase()
+              var q = countryFilter.text.toLowerCase()
               var out = []
               for (var i = 0; i < root.countryRows.length; i++) {
                 var c = root.countryRows[i]
@@ -539,21 +700,31 @@ Panel {
             delegate: Item {
               id: countryRow
               required property var modelData
+              readonly property bool current: root.countryCode === modelData.id
               width: parent ? parent.width : 0
-              height: Style.space(20)
+              height: Style.space(26)
+
+              Rectangle {
+                anchors.fill: parent
+                radius: Style.cornerRadius
+                color: countryRow.current ? Qt.rgba(1, 1, 1, 0.07)
+                      : (rowMouse.containsMouse ? Qt.rgba(1, 1, 1, 0.045) : "transparent")
+              }
 
               // The Row is a positioner: it force-places every child,
               // so the click target lives OUTSIDE it, filling this Item.
               Row {
                 anchors.fill: parent
+                anchors.leftMargin: Style.space(8)
+                anchors.rightMargin: Style.space(8)
                 spacing: Style.space(7)
 
                 Rectangle {
                   width: Style.space(3)
                   height: Style.space(14)
                   radius: Style.space(2)
-                  color: root.countryCode === countryRow.modelData.id ? Color.accent : Color.muted
-                  opacity: root.countryCode === countryRow.modelData.id ? 0.95 : 0.4
+                  color: countryRow.current ? Color.accent : Color.muted
+                  opacity: countryRow.current ? 0.95 : 0.4
                   anchors.verticalCenter: parent.verticalCenter
                 }
                 Text {
@@ -563,16 +734,18 @@ Panel {
                   color: Color.popups.text
                   font.family: Style.font.family
                   font.pixelSize: Style.space(12)
-                  font.bold: root.countryCode === countryRow.modelData.id
+                  font.bold: countryRow.current
+                  anchors.verticalCenter: parent.verticalCenter
                 }
                 Text {
                   textFormat: Text.PlainText
-                  width: countryRow.width - Style.space(30 + 54 + 24)
+                  width: countryRow.width - Style.space(30 + 54 + 40)
                   text: countryRow.modelData.name
-                  color: Color.muted
+                  color: countryRow.current ? Color.popups.text : Color.muted
                   font.family: Style.font.family
                   font.pixelSize: Style.space(12)
                   elide: Text.ElideRight
+                  anchors.verticalCenter: parent.verticalCenter
                 }
                 Text {
                   textFormat: Text.PlainText
@@ -582,11 +755,14 @@ Panel {
                   font.family: Style.font.family
                   font.pixelSize: Style.space(11)
                   horizontalAlignment: Text.AlignRight
+                  anchors.verticalCenter: parent.verticalCenter
                 }
               }
 
               MouseArea {
+                id: rowMouse
                 anchors.fill: parent
+                hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 onClicked: root.pickCountry(countryRow.modelData.id)
               }
