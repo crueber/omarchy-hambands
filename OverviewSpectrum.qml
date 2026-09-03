@@ -6,6 +6,12 @@ import QtQuick
 // honest map — it shows how slim 2200m really is next to 10m, where the
 // channelised 60m sliver sits, and how the microwaves stack up top.
 //
+// Deliberately no band names on this axis: the whole of HF is under a
+// fifth of its width, so no ham band is wide enough on screen to hold
+// its own label — any label row is overlap by construction. Band
+// identity comes from hovering (the inspector names the band) and from
+// the labelled detail rows underneath; the axis keeps only decade ticks.
+//
 // Colour is by mode (phone / data / CW, same as the rows); the class
 // filter drives dimming, not colour. Hover reports the fine print,
 // click opens the band's propagation story.
@@ -24,10 +30,10 @@ Item {
   signal segmentHovered(string text)
   signal bandClicked(string band)
 
-  implicitHeight: barHeight + tickH + labelH + 8
+  implicitHeight: barHeight + tickH + labelH + 4
   readonly property real barHeight: 40
   readonly property real tickH: 8
-  readonly property real labelH: labelSize + 6
+  readonly property real labelH: labelSize + 4
 
   // Dataset extremes with breathing room on each side.
   readonly property real loKhz: 100
@@ -54,7 +60,7 @@ Item {
     return out
   }
 
-  // Decade ticks with labels.
+  // Decade ticks with labels. These are the only text on the axis.
   readonly property var ticks: [
     { khz: 1000, t: "1M" },
     { khz: 10000, t: "10M" },
@@ -63,36 +69,6 @@ Item {
     { khz: 10000000, t: "10G" },
     { khz: 100000000, t: "100G" }
   ]
-
-  // Band labels that clear their predecessor (log axis crowds them).
-  readonly property var labelled: {
-    var seen = {}
-    var bands = []
-    for (var i = 0; i < bandGroups.length; i++) {
-      var g = bandGroups[i]
-      if (seen[g.band]) continue
-      seen[g.band] = true
-      var first = g.segments[0]
-      var last = g.segments[g.segments.length - 1]
-      if (!first || !last) continue
-      var cx = (xFor(first.from) + xFor(last.to)) / 2
-      bands.push({ band: g.band, x: cx })
-    }
-    var out = []
-    var lastRight = -1e9
-    var approx = labelSize * 0.62
-    for (var k = 0; k < bands.length; k++) {
-      var b = bands[k]
-      var w = String(b.band).length * approx
-      var x = b.x - w / 2
-      if (x < 0) x = 0
-      if (x > root.width - w) x = Math.max(0, root.width - w)
-      if (x < lastRight + 4) continue
-      lastRight = x + w
-      out.push({ band: b.band, x: x })
-    }
-    return out
-  }
 
   // Track.
   Rectangle {
@@ -121,7 +97,7 @@ Item {
       height: track.height - 6
       radius: 3
       color: root.colorFor(seg)
-      opacity: allowed ? 0.92 : 0.22
+      opacity: allowed ? 0.95 : 0.12
       Behavior on opacity { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
 
       MouseArea {
@@ -175,28 +151,6 @@ Item {
         color: root.mutedColor
         font.family: root.fontFamily
         font.pixelSize: root.labelSize * 0.85
-      }
-    }
-  }
-
-  // Band labels.
-  Repeater {
-    model: root.labelled
-    delegate: Text {
-      required property var modelData
-      textFormat: Text.PlainText
-      x: modelData.x
-      y: root.barHeight + root.tickH + 3
-      text: modelData.band
-      color: root.inkColor
-      opacity: 0.55
-      font.family: root.fontFamily
-      font.pixelSize: root.labelSize * 0.85
-      MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        hoverEnabled: true
-        onClicked: root.bandClicked(parent.text)
       }
     }
   }

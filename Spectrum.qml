@@ -129,7 +129,7 @@ Column {
             height: parent.height - 6
             radius: 5
             color: root.colorFor(seg.modelData)
-            opacity: segMouse.containsMouse ? 1.0 : (seg.allowed ? 0.92 : 0.26)
+            opacity: segMouse.containsMouse ? 1.0 : (seg.allowed ? 0.95 : 0.12)
             border.width: segMouse.containsMouse ? 1 : 0
             border.color: Qt.rgba(1, 1, 1, 0.85)
             Behavior on opacity { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
@@ -205,7 +205,7 @@ Column {
                   height: parent.height
                   radius: 3
                   color: root.colorFor(mseg.modelData)
-                  opacity: msegMouse.containsMouse ? 1.0 : (mseg.allowed ? 0.92 : 0.26)
+                  opacity: msegMouse.containsMouse ? 1.0 : (mseg.allowed ? 0.95 : 0.12)
                   border.width: msegMouse.containsMouse ? 1 : 0
                   border.color: Qt.rgba(1, 1, 1, 0.85)
                   Behavior on opacity { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
