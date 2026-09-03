@@ -134,11 +134,6 @@ Column {
             border.color: Qt.rgba(1, 1, 1, 0.85)
             Behavior on opacity { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
 
-            gradient: Gradient {
-              GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.22) }
-              GradientStop { position: 0.45; color: Qt.rgba(1, 1, 1, 0.0) }
-            }
-
             MouseArea {
               id: segMouse
               anchors.fill: parent
@@ -214,11 +209,6 @@ Column {
                   border.width: msegMouse.containsMouse ? 1 : 0
                   border.color: Qt.rgba(1, 1, 1, 0.85)
                   Behavior on opacity { NumberAnimation { duration: 140; easing.type: Easing.OutCubic } }
-
-                  gradient: Gradient {
-                    GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0.22) }
-                    GradientStop { position: 0.45; color: Qt.rgba(1, 1, 1, 0.0) }
-                  }
 
                   MouseArea {
                     id: msegMouse
