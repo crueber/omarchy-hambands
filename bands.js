@@ -121,7 +121,7 @@ function topOfBand(cty, band, classId) {
 }
 
 // Human frequency formatting: kHz below 100 MHz, MHz to 3 GHz, GHz above.
-// Non-integers keep one decimal — 60 m channels live at 5330.6.
+// Non-integers keep one decimal — 60m channels live at 5330.6.
 function trimNum(n) {
   var v = Math.round(n * 10) / 10
   return Number.isInteger(v) ? v.toFixed(0) : v.toFixed(1)

@@ -24,12 +24,13 @@ Column {
 
   property var bandGroups: []            // [{band, segments:[...]}] from Bands.groupByBand
   property string selectedClass: ""
-  property var colorFor: function (segment) { return "#3fb950" }
+  property var colorFor: function (segment) { return "#5a9e6f" }
   property var describe: function (segment) { return "" }
   property string dividerColor: "#111111"
   property real labelWidth: 66
   property real rowHeight: 21
   property real fontSize: 11
+  property real rightPad: 12
   property string inkColor: "#e6e6e6"
   property string mutedColor: "#8b949e"
 
@@ -58,40 +59,6 @@ Column {
     return out
   }
 
-  // One segment bar: square, tiling its share of the band exactly.
-  component SegmentBar: Rectangle {
-    property real baseLeft
-    property real baseSpan
-
-    x: baseLeft
-    width: Math.max(2, baseSpan)
-    height: parent.height - 5
-    anchors.verticalCenter: parent.verticalCenter
-    color: root.colorFor(modelData)
-    opacity: root.selectedClass === ""
-      || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0) ? 0.9 : 0.28
-
-    MouseArea {
-      anchors.fill: parent
-      hoverEnabled: true
-      cursorShape: Qt.PointingHandCursor
-      onEntered: root.segmentHovered(root.describe(parent.modelData))
-      onExited: root.segmentHovered("")
-      onClicked: root.bandClicked(parent.modelData.band)
-    }
-  }
-
-  // A boundary tick: runs the full row height so it reads as drawn through
-  // the bar, not as a seam between two rectangles.
-  component BoundaryTick: Rectangle {
-    property real tickX
-
-    x: tickX - 1
-    width: 2
-    height: parent.height
-    color: root.dividerColor
-  }
-
   Repeater {
     model: root.rows
 
@@ -105,8 +72,7 @@ Column {
       Text {
         textFormat: Text.PlainText
         width: root.labelWidth
-        height: parent.height
-        verticalAlignment: Text.AlignVCenter
+        anchors.verticalCenter: parent.verticalCenter
         text: bandRow.modelData.band
         color: root.inkColor
         font.pixelSize: root.fontSize
@@ -122,7 +88,7 @@ Column {
 
       Item {
         id: track
-        width: parent.width - root.labelWidth
+        width: parent.width - root.labelWidth - root.rightPad
         height: parent.height
 
         // Track hairline: closed ranges read against it.
@@ -138,12 +104,29 @@ Column {
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
-          SegmentBar {
+          Rectangle {
+            id: seg
             required property var modelData
-            baseLeft: (modelData.from - bandRow.modelData.min)
-                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width
-            baseSpan: (modelData.to - modelData.from)
-                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+            readonly property bool allowed: root.selectedClass === ""
+              || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
+
+            x: (modelData.from - bandRow.modelData.min)
+               / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+            width: Math.max(2, (modelData.to - modelData.from)
+                      / (bandRow.modelData.max - bandRow.modelData.min) * track.width)
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height - 5
+            color: root.colorFor(seg.modelData)
+            opacity: seg.allowed ? 0.9 : 0.28
+
+            MouseArea {
+              anchors.fill: parent
+              hoverEnabled: true
+              cursorShape: Qt.PointingHandCursor
+              onEntered: root.segmentHovered(root.describe(seg.modelData))
+              onExited: root.segmentHovered("")
+              onClicked: root.bandClicked(seg.modelData.band)
+            }
           }
         }
 
@@ -151,11 +134,15 @@ Column {
         Repeater {
           model: bandRow.modelData.micro ? [] : bandRow.modelData.segments
 
-          BoundaryTick {
+          Rectangle {
             required property int index
             required property var modelData
-            tickX: (modelData.from - bandRow.modelData.min)
-                   / (bandRow.modelData.max - bandRow.modelData.min) * track.width
+
+            x: (modelData.from - bandRow.modelData.min)
+               / (bandRow.modelData.max - bandRow.modelData.min) * track.width - 1
+            width: 2
+            height: parent.height
+            color: root.dividerColor
             visible: index > 0
           }
         }
@@ -183,20 +170,41 @@ Column {
               Repeater {
                 model: slice.modelData.segments
 
-                SegmentBar {
+                Rectangle {
+                  id: mseg
                   required property var modelData
-                  baseLeft: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
-                  baseSpan: (modelData.to - modelData.from) / slice.bandSpan * slice.width
+                  readonly property bool allowed: root.selectedClass === ""
+                    || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
+
+                  x: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
+                  width: Math.max(2, (modelData.to - modelData.from) / slice.bandSpan * slice.width)
+                  anchors.verticalCenter: parent.verticalCenter
+                  height: parent.height - 5
+                  color: root.colorFor(mseg.modelData)
+                  opacity: mseg.allowed ? 0.9 : 0.28
+
+                  MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onEntered: root.segmentHovered(root.describe(mseg.modelData))
+                    onExited: root.segmentHovered("")
+                    onClicked: root.bandClicked(mseg.modelData.band)
+                  }
                 }
               }
 
               Repeater {
                 model: slice.modelData.segments
 
-                BoundaryTick {
+                Rectangle {
                   required property int index
                   required property var modelData
-                  tickX: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width
+
+                  x: (modelData.from - slice.firstSeg.from) / slice.bandSpan * slice.width - 1
+                  width: 2
+                  height: parent.height
+                  color: root.dividerColor
                   visible: index > 0
                 }
               }

@@ -113,10 +113,10 @@ Panel {
   // means full privilege, so it shares phone's colour.
   function modeColor(s) {
     var m = s.modes
-    if (!m || !m.length) return "#3fb950"                      // phone
-    if (m.indexOf("phone") >= 0 || m.indexOf("image") >= 0) return "#3fb950"
-    if (m.indexOf("data") >= 0) return "#58a6ff"               // data
-    if (m.indexOf("cw") >= 0) return "#d29922"                 // cw
+    if (!m || !m.length) return "#5a9e6f"                      // phone
+    if (m.indexOf("phone") >= 0 || m.indexOf("image") >= 0) return "#5a9e6f"
+    if (m.indexOf("data") >= 0) return "#6e96c4"               // data
+    if (m.indexOf("cw") >= 0) return "#c19a56"                 // cw
     return "#8b949e"
   }
 
@@ -429,9 +429,9 @@ Panel {
 
             Repeater {
               model: [
-                { c: "#3fb950", t: "phone" },
-                { c: "#58a6ff", t: "data" },
-                { c: "#d29922", t: "cw" }
+                { c: "#5a9e6f", t: "phone" },
+                { c: "#6e96c4", t: "data" },
+                { c: "#c19a56", t: "cw" }
               ]
               delegate: Row {
                 required property var modelData

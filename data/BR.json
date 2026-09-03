@@ -10,7 +10,7 @@
   },
   "source": {
     "id": "anatel-cartilha-2026",
-    "name": "Cartilha do Servico Radioamador (official ANATEL guidebook, June 2026) - used as the cross-check for class gating, powers and the 60 m / EIRP special conditions; the LABRE/LIGA de Amadores society charts were not needed",
+    "name": "Cartilha do Servico Radioamador (official ANATEL guidebook, June 2026) - used as the cross-check for class gating, powers and the 60m / EIRP special conditions; the LABRE/LIGA de Amadores society charts were not needed",
     "url": "https://www.gov.br/anatel/pt-br/assuntos/noticias/anatel-simplifica-regras-e-fortalece-o-radioamadorismo-no-brasil/cartilha_radioamador.pdf/@@display-file/file",
     "retrieved": "2026-09"
   },
@@ -97,7 +97,7 @@
       "classes": [
         "a"
       ],
-      "note": "Class A only (Region 2 80 m extension)."
+      "note": "Class A only (Region 2 80m extension)."
     },
     {
       "band": "60m",
@@ -159,7 +159,7 @@
         "a",
         "b"
       ],
-      "note": "Class A and B (Region 2 40 m up to 7300 kHz)."
+      "note": "Class A and B (Region 2 40m up to 7300 kHz)."
     },
     {
       "band": "30m",
@@ -483,5 +483,5 @@
       "note": ""
     }
   ],
-  "note": "ANATEL gates the service by COER operator class: Classe C (entry, minimum age 10) is limited to the 'todas as classes' segments of Tabela I of Ato 926/2024 (1800-1850, 3500-3800, 7000-7047, 21000-21150, 24890-24990, 28-29.7, 50-54, 144-148, 220-225, 430-440 MHz and the 33 cm-and-above UHF/SHF bands); Classe B adds the 7047-7300 and 21150-21300 kHz segments; Classe A (advanced exam, or one year as B) alone gets 1850-2000, 3800-4000, 60 m, 30 m, 20 m and 17 m. General power caps are average transmitter output: 1500 W (A), 1000 W (B), 100 W (C), with EIRP caps of 1 W on 2200 m, 5 W on 630 m, 25 W on 60 m and 100 W EIRP on the microwave terrestrial-link bands. Modes are regulated per sub-band segment (Ato 926/2024 Tabelas II-XXIX: CW, Fonia SSB/AM/FM/DV, Modos Digitais, Demais Modos incl. Fac-simile/SSTV/FSTV/Teste); that fine-grained mode map is not transcribed here, so 'modes' are given only where a segment is uniform (2200 m, 630 m, 60 m). Ground truth is Ato 926/2024 Tabela I plus Ato 3.448/2026 (operational requirements) on the ANATEL legislation portal, cross-checked against ANATEL's official June 2026 Cartilha; the society fallback (LABRE/LIGA de Amadores) was not needed."
+  "note": "ANATEL gates the service by COER operator class: Classe C (entry, minimum age 10) is limited to the 'todas as classes' segments of Tabela I of Ato 926/2024 (1800-1850, 3500-3800, 7000-7047, 21000-21150, 24890-24990, 28-29.7, 50-54, 144-148, 220-225, 430-440 MHz and the 33cm-and-above UHF/SHF bands); Classe B adds the 7047-7300 and 21150-21300 kHz segments; Classe A (advanced exam, or one year as B) alone gets 1850-2000, 3800-4000, 60m, 30m, 20m and 17m. General power caps are average transmitter output: 1500 W (A), 1000 W (B), 100 W (C), with EIRP caps of 1 W on 2200m, 5 W on 630m, 25 W on 60m and 100 W EIRP on the microwave terrestrial-link bands. Modes are regulated per sub-band segment (Ato 926/2024 Tabelas II-XXIX: CW, Fonia SSB/AM/FM/DV, Modos Digitais, Demais Modos incl. Fac-simile/SSTV/FSTV/Teste); that fine-grained mode map is not transcribed here, so 'modes' are given only where a segment is uniform (2200m, 630m, 60m). Ground truth is Ato 926/2024 Tabela I plus Ato 3.448/2026 (operational requirements) on the ANATEL legislation portal, cross-checked against ANATEL's official June 2026 Cartilha; the society fallback (LABRE/LIGA de Amadores) was not needed."
 }
