@@ -1,0 +1,371 @@
+{
+  "id": "IN",
+  "name": "India",
+  "ituRegion": 3,
+  "regulator": {
+    "name": "Wireless Planning and Coordination (WPC) Wing, Department of Telecommunications (DoT), Ministry of Communications",
+    "document": "Office Memorandum No. L-14011/255/2004-AMT dated 13-08-2010, Annexure-I (frequency bands, emissions and power) issued under the Indian Wireless Telegraphs (Amateur Service) Rules, 1978, as amended (2005, 2009/2010)",
+    "url": "https://wpc.gov.in/WriteReadData/userfiles/file/amateur_new_guidelines.pdf",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "arsi",
+    "name": "Amateur Radio Society of India (ARSI) - intended cross-check only; wpc.gov.in was unreachable, so the regulator document itself was retrieved from the Internet Archive snapshot of 5 Dec 2017 (ARSI site is reachable but exposes no band-plan page)",
+    "url": "https://web.archive.org/web/20171205004205/http://wpc.gov.in/WriteReadData/userfiles/file/amateur_new_guidelines.pdf",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    {
+      "id": "general",
+      "name": "General Grade"
+    },
+    {
+      "id": "restricted",
+      "name": "Restricted Grade"
+    }
+  ],
+  "bands": [
+    {
+      "band": "160m",
+      "from": 1820,
+      "to": 1860,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input to final stage 400 W. Shared primary basis. Same segment open to Restricted Grade on phone only (50 W DC input)."
+    },
+    {
+      "band": "160m",
+      "from": 1820,
+      "to": 1860,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W. Emissions A3E/H3E/J3E/R3E; CW (A1A) only for legacy pre-2009 'Grade II' licensees."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3700,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only (50 W DC input)."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3700,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W; A3E/H3E/J3E/R3E; CW only for legacy Grade II licensees."
+    },
+    {
+      "band": "80m",
+      "from": 3890,
+      "to": 3900,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Single shared-phone segment per Annexure-I; max DC input 400 W."
+    },
+    {
+      "band": "80m",
+      "from": 3890,
+      "to": 3900,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7200,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7200,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Edges as per the General-Grade row of the same Annexure (24890-24990 kHz; Restricted row in source shows 24800-24990, consistent with 24890-24990 allocation) - unverified to glyph level. Max DC input 50 W."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max DC input 400 W. Same segment open to Restricted Grade on phone only."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "phone"
+      ],
+      "note": "Max DC input 50 W."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 54000,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max 25 W. Emissions F1B/F2B (data), F3E (phone), F3C (image)."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 54000,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max 10 W."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 146000,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max 25 W."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 146000,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Max 10 W."
+    },
+    {
+      "band": "70cm",
+      "from": 434000,
+      "to": 438000,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary basis. Max 25 W. Amateur satellite permitted for General Grade (30 dBW EIRP) in appropriate sub-bands."
+    },
+    {
+      "band": "70cm",
+      "from": 434000,
+      "to": 438000,
+      "classes": [
+        "restricted"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary basis. Max 10 W."
+    },
+    {
+      "band": "5cm",
+      "from": 5725000,
+      "to": 5840000,
+      "classes": [
+        "general"
+      ],
+      "modes": [
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "5.725-5.84 GHz, secondary basis. Max 25 W. General Grade only."
+    }
+  ],
+  "note": "Two licence grades (Advanced and older Grades I/II were consolidated in the 2009/2010 amendment): the Restricted Grade (entry exam, VU3 call block) gets 50 W DC-input on a limited set of HF segments phone-only (A3E/H3E/J3E/R3E; CW A1A survives only for legacy pre-2009 Grade II licensees) plus VHF/UHF at 10 W; the General Grade (VU2 call block) gets the same HF segments plus CW/digital/image modes at 400 W DC input, 25 W on VHF/UHF, amateur satellite (30 dBW EIRP) and the secondary 5.7 GHz SHF segment. Key deviations: India has no 2200 m, 630 m, 30 m or 60 m amateur allocations in the WPC table (those bands are simply absent, so they are omitted here); 70 cm is secondary and listed as 434-438 MHz; A3F fast-scan TV is restricted to identification/test transmissions. Ground truth is the WPC O.M. Annexure-I; wpc.gov.in was unreachable from this network so the regulator PDF was taken from the Internet Archive snapshot of 5 Dec 2017, and ARSI (arsi.info) was checked as the society cross-check but publishes no band-plan page."
+}

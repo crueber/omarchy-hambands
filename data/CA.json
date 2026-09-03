@@ -1,0 +1,478 @@
+{
+  "id": "CA",
+  "name": "Canada",
+  "ituRegion": 2,
+  "regulator": {
+    "name": "Innovation, Science and Economic Development Canada (ISED)",
+    "document": "RBR-4 — Standards for the Operation of Radio Stations in the Amateur Radio Service, Issue 3 (July 2022), Schedule I",
+    "url": "https://ised-isde.canada.ca/site/spectrum-management-telecommunications/en/licences-and-certificates/regulations-reference-rbr/rbr-4-standards-operation-radio-stations-amateur-radio-service",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "ised-rbr4",
+    "name": "ISED RBR-4 Issue 3 (July 2022) — Schedule I, frequency bands and bandwidths for amateur stations operating in Canada",
+    "url": "https://ised-isde.canada.ca/site/spectrum-management-telecommunications/sites/default/files/attachments/2022/RBR-4-i3-2022-07EN.pdf",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    {
+      "id": "advanced",
+      "name": "Amateur Radio Operator Certificate with Advanced Qualification"
+    },
+    {
+      "id": "basic-honours",
+      "name": "Amateur Radio Operator Certificate with Basic Qualification with Honours (score of 80% or above)"
+    },
+    {
+      "id": "basic",
+      "name": "Amateur Radio Operator Certificate with Basic Qualification"
+    }
+  ],
+  "note": "Operator certification is governed by ISED; RBR-4 (formerly RIC-2, reclassified as RBR-4 in 2007; current Issue 3, July 2022) sets frequency privileges per qualification. A Basic Qualification alone is limited to bands above 30 MHz; all access below 30 MHz requires Basic with Honours (80%+ on the Basic exam) or the Advanced Qualification — a Basic holder with the 5 w.p.m. Morse Code qualification also has full HF access, though RBR-4 lists it as a separate qualification. RBR-4 does not grant Basic holders any sub-30 MHz segment; §11 only requires that signals automatically retransmitted below 29.5 MHz originate from an operator qualified below 30 MHz. Power caps: Basic — 560 W PEP (SSB), 190 W carrier (other emissions), or 250 W DC input; Advanced — 2250 W PEP (SSB), 750 W carrier, or 1000 W DC input; an external amplifier must not be capable of exceeding the applicable limit by more than 3 dB. Key deviations from the international table: 60 m operation is channelized (five fixed channels, 2.8 kHz max bandwidth, 100 W PEP e.r.p., CW/data/phone emissions only, no interference protection, C21); 30 m is a non-conforming Canadian allocation with no interference protection (C6); 40 m 7200–7300 kHz must not constrain broadcasting (5.142); 219–220 MHz is secondary and 220–222 MHz only in exceptional circumstances such as disaster relief (C11). 2200 m and 630 m are capped at 1 W e.i.r.p. Authorized foreign amateurs receive Basic + Advanced privileges, capped by their home licence.",
+  "bands": [
+    {
+      "band": "2200m",
+      "from": 135.7,
+      "to": 137.8,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "Maximum radiated power 1 W e.i.r.p. (footnote 5.67A); 100 Hz max bandwidth; must not interfere with radionavigation service."
+    },
+    {
+      "band": "630m",
+      "from": 472,
+      "to": 479,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "Maximum 1 W e.i.r.p. (footnote 5.80A); 1 kHz max bandwidth; no protection from, and no harmful interference to, aeronautical radionavigation."
+    },
+    {
+      "band": "160m",
+      "from": 1800,
+      "to": 2000,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 4000,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "60m",
+      "from": 5330.6,
+      "to": 5333.4,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone"
+      ],
+      "note": "Discrete channel centre frequency (C21); 2.8 kHz max bandwidth. Encoded here as the 2.8 kHz channel width around the centre."
+    },
+    {
+      "band": "60m",
+      "from": 5346.6,
+      "to": 5349.4,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone"
+      ],
+      "note": "Discrete channel centre frequency (C21); 2.8 kHz max bandwidth. Encoded here as the 2.8 kHz channel width around the centre."
+    },
+    {
+      "band": "60m",
+      "from": 5351.5,
+      "to": 5366.5,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone"
+      ],
+      "note": "C21: 100 W PEP e.r.p. per channel; emissions limited to telephony (2K80J3E), data (2K80J2D), RTTY (60H0J2B) and CW (150HA1A); 2.8 kHz max bandwidth; non-conforming allocation — no interference protection, may be ordered off if fixed/mobile operations are affected."
+    },
+    {
+      "band": "60m",
+      "from": 5371.6,
+      "to": 5374.4,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone"
+      ],
+      "note": "Discrete channel centre frequency (C21); 2.8 kHz max bandwidth. Encoded here as the 2.8 kHz channel width around the centre."
+    },
+    {
+      "band": "60m",
+      "from": 5403.6,
+      "to": 5406.4,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone"
+      ],
+      "note": "Discrete channel centre frequency (C21); 2.8 kHz max bandwidth. Encoded here as the 2.8 kHz channel width around the centre."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7300,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth; amateur use of 7200–7300 kHz shall not constrain broadcasting (footnote 5.142)."
+    },
+    {
+      "band": "30m",
+      "from": 10100,
+      "to": 10150,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "1 kHz max bandwidth; non-conforming Canadian allocation (C6) — no interference protection and may be required to cease if fixed service of other administrations is affected."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "6 kHz max bandwidth."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": [
+        "advanced",
+        "basic-honours"
+      ],
+      "note": "20 kHz max bandwidth; automatic retransmission below 29.5 MHz only of signals from an operator qualified below 30 MHz."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 54000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "30 kHz max bandwidth."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 148000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "30 kHz max bandwidth."
+    },
+    {
+      "band": "1.25m",
+      "from": 219000,
+      "to": 220000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "Secondary basis (C11); 100 kHz max bandwidth."
+    },
+    {
+      "band": "1.25m",
+      "from": 220000,
+      "to": 222000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "Secondary basis; exceptional circumstances only, e.g. disaster-relief assistance (C11); 100 kHz max bandwidth."
+    },
+    {
+      "band": "1.25m",
+      "from": 222000,
+      "to": 225000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "100 kHz max bandwidth."
+    },
+    {
+      "band": "70cm",
+      "from": 430000,
+      "to": 450000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "12 MHz max bandwidth; transmissions shall neither cause nor receive protection from interference by other services."
+    },
+    {
+      "band": "33cm",
+      "from": 902000,
+      "to": 928000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "12 MHz max bandwidth; no interference to or protection from other services."
+    },
+    {
+      "band": "23cm",
+      "from": 1240000,
+      "to": 1300000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "13cm",
+      "from": 2300000,
+      "to": 2450000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "9cm",
+      "from": 3300000,
+      "to": 3500000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "5cm",
+      "from": 5650000,
+      "to": 5925000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "3cm",
+      "from": 10000000,
+      "to": 10500000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "1.2cm",
+      "from": 24000000,
+      "to": 24050000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ]
+    },
+    {
+      "band": "1.2cm",
+      "from": 24050000,
+      "to": 24250000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "6mm",
+      "from": 47000000,
+      "to": 47200000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ]
+    },
+    {
+      "band": "4mm",
+      "from": 76000000,
+      "to": 77500000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "4mm",
+      "from": 77500000,
+      "to": 78000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ]
+    },
+    {
+      "band": "4mm",
+      "from": 78000000,
+      "to": 81000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "4mm",
+      "from": 81000000,
+      "to": 81500000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "Secondary basis (footnote 5.561A)."
+    },
+    {
+      "band": "2.5mm",
+      "from": 122250000,
+      "to": 123000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "2mm",
+      "from": 134000000,
+      "to": 136000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ]
+    },
+    {
+      "band": "2mm",
+      "from": 136000000,
+      "to": 141000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "1.2mm",
+      "from": 241000000,
+      "to": 248000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ],
+      "note": "No interference to or protection from other services."
+    },
+    {
+      "band": "1.2mm",
+      "from": 248000000,
+      "to": 250000000,
+      "classes": [
+        "advanced",
+        "basic-honours",
+        "basic"
+      ]
+    }
+  ]
+}

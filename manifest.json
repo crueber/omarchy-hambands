@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "com.leafbox.hambands",
+  "name": "Ham Bands",
+  "version": "0.1.0",
+  "author": "Robert (leafbox)",
+  "license": "MIT",
+  "homepage": "https://github.com/Snackwrap/omarchy-hambands",
+  "repository": "https://github.com/Snackwrap/omarchy-hambands",
+  "description": "Amateur radio frequency allocations by country and license class in the Omarchy bar: pick your country and license, see exactly where you may transmit.",
+  "keywords": ["ham radio", "amateur radio", "band plan", "allocations", "license class", "bar", "quickshell"],
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Ham Bands",
+    "description": "Band allocations by country and license class.",
+    "category": "Info",
+    "aliases": ["ham", "band plan", "allocations", "bands", "license"],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "country": "US",
+      "myClass": "",
+      "pillContent": "band",
+      "popupPosition": "icon"
+    },
+    "schema": [
+      {
+        "key": "country",
+        "label": "Country",
+        "type": "string",
+        "default": "US",
+        "description": "ISO 3166-1 alpha-2 code of the allocation table to show, e.g. US, GB, DE, AU"
+      },
+      {
+        "key": "myClass",
+        "label": "Your license class",
+        "type": "string",
+        "default": "",
+        "description": "Class id from the country's table, e.g. technician, foundation, ein. Blank shows every class"
+      },
+      {
+        "key": "pillContent",
+        "label": "Bar pill shows",
+        "type": "enum",
+        "options": ["band", "class"],
+        "default": "band",
+        "description": "band shows the allocation around the current frequency highlight; class shows your license class name"
+      },
+      {
+        "key": "popupPosition",
+        "label": "Popup position",
+        "type": "enum",
+        "options": ["icon", "center"],
+        "default": "icon",
+        "description": "Where the popup opens"
+      }
+    ]
+  }
+}

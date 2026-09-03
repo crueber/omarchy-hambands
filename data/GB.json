@@ -1,0 +1,55 @@
+{
+  "id": "GB",
+  "name": "United Kingdom",
+  "ituRegion": 1,
+  "regulator": {
+    "name": "Ofcom",
+    "document": "Amateur Radio Wireless Telegraphy Licence Conditions Booklet OFW611 (published 21 February 2024), Schedule 1 Tables A/B/C",
+    "url": "https://www.ofcom.org.uk/siteassets/resources/documents/spectrum/emf/emf-amateur-licence-terms-and-conditions.pdf",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "rsgb-bandplans",
+    "name": "RSGB Band Plans (January 2026 edition)",
+    "url": "https://rsgb.services/public/bandplans/docs/260125_rsgb_band_plan_2026.pdf",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    { "id": "full", "name": "Full" },
+    { "id": "intermediate", "name": "Intermediate" },
+    { "id": "foundation", "name": "Foundation" }
+  ],
+  "note": "Ofcom issues a single licence in three classes - Foundation, Intermediate and Full - each with its own frequency/power table in Schedule 1 of licence booklet OFW611 (published 21 February 2024; the 2024 reform, announced/rolled out Feb-Apr 2024, gave Foundation and Intermediate access to nearly all bands previously Full-only). Peak envelope power limits: Foundation 25 W, Intermediate 100 W, Full 1000 W on primary allocations and 400 W on secondary allocations; band-specific caps override class caps (160 m above 1850 kHz 32 W, 6 m above 51 MHz 100 W, 4 m 160 W, 70 cm 430-432 MHz 40 W ERP, 630 m 5 W EIRP, 2200 m 1 W ERP, Foundation on 10 GHz 1 W, Foundation on 2.4/5.7 GHz bands 2 W). Band privileges differ as follows: 630 m (472-479 kHz) and the channelised 60 m band (5258.5-5406.5 kHz, 11 discrete channels, 100 W PEP but not exceeding 200 W EIRP, licence note G conditions) are Full-only; Foundation additionally lacks 23 cm (1240-1325 MHz) and the 2.3 GHz/3.4 GHz/5.83-5.85 GHz segments. All three classes share 2200 m, 160 m-10 m, 6 m, 4 m, 2 m and 70 cm. The licence imposes no mode restrictions, only power/status limits; geographic or coordination conditions exist on 70 cm (431-432 MHz excluded within 100 km of Charing Cross, London), 10 m (within 50 km of Waddington) and 2 m (within 50 km of Scarborough). Airborne operation is limited to 500 mW EIRP where stated. The 4 m band is 70.0-70.5 MHz (69.9-70.5 is not a UK allocation; 70.5-71.5 MHz is a separate Full-only NoV 'innovation band'). NoV-only Full bands 146-147 MHz, 2300-2302 MHz and >275 GHz are excluded here.",
+  "bands": [
+    { "band": "2200m", "from": 135.7, "to": 137.8, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 1 W ERP for all classes; non-interference basis." },
+    { "band": "630m", "from": 472, "to": 479, "classes": ["full"], "note": "Full only; secondary; 5 W EIRP maximum." },
+    { "band": "160m", "from": 1810, "to": 1850, "classes": ["full", "intermediate", "foundation"], "note": "Primary; 1810-1830 kHz on a non-interference basis to services outside the UK/Crown Dependencies; 500 mW EIRP airborne limit." },
+    { "band": "160m", "from": 1850, "to": 2000, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 32 W PEP cap for all classes." },
+    { "band": "80m", "from": 3500, "to": 3800, "classes": ["full", "intermediate", "foundation"], "note": "Primary; 25 W (Foundation) / 100 W (Intermediate) / 1000 W (Full)." },
+    { "band": "60m", "from": 5258.5, "to": 5264, "classes": ["full"], "note": "Channelised 5 MHz band, Full only; secondary; 100 W PEP but not exceeding 200 W EIRP; licence note G conditions apply (6 kHz max DSB bandwidth, no interference to MoD, no out-of-channel radiation)." },
+    { "band": "60m", "from": 5276, "to": 5284, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5288.5, "to": 5292, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5298, "to": 5307, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5313, "to": 5323, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5333, "to": 5338, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5354, "to": 5358, "classes": ["full"], "note": "5 MHz channel set within the WRC-15 allocation (5351.5-5366.5 kHz); no transmissions above 5358 kHz when operating digital modes in this channel; otherwise same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5362, "to": 5374.5, "classes": ["full"], "note": "5 MHz channel set partly within the WRC-15 allocation (5351.5-5366.5 kHz); same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5378, "to": 5382, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5395, "to": 5401.5, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "60m", "from": 5403.5, "to": 5406.5, "classes": ["full"], "note": "5 MHz channel set; same conditions as 5258.5-5264 kHz." },
+    { "band": "40m", "from": 7000, "to": 7200, "classes": ["full", "intermediate", "foundation"], "note": "Primary; 25 W (Foundation) / 100 W (Intermediate) / 1000 W (Full)." },
+    { "band": "30m", "from": 10100, "to": 10150, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; Full limited to 400 W (secondary-band cap); narrowband-only usage by convention (IARU)." },
+    { "band": "20m", "from": 14000, "to": 14350, "classes": ["full", "intermediate", "foundation"], "note": "Primary; 25 W (Foundation) / 100 W (Intermediate) / 1000 W (Full)." },
+    { "band": "17m", "from": 18068, "to": 18168, "classes": ["full", "intermediate", "foundation"], "note": "Primary." },
+    { "band": "15m", "from": 21000, "to": 21450, "classes": ["full", "intermediate", "foundation"], "note": "Primary." },
+    { "band": "12m", "from": 24890, "to": 24990, "classes": ["full", "intermediate", "foundation"], "note": "Primary." },
+    { "band": "10m", "from": 28000, "to": 29700, "classes": ["full", "intermediate", "foundation"], "note": "Primary; specific conditions apply within 50 km of Waddington (NGR SK985640)." },
+    { "band": "6m", "from": 50000, "to": 51000, "classes": ["full", "intermediate", "foundation"], "note": "Primary; 25 W (Foundation) / 100 W (Intermediate) / 1000 W (Full)." },
+    { "band": "6m", "from": 51000, "to": 52000, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 100 W PEP cap for all classes (caps Full); non-interference basis." },
+    { "band": "4m", "from": 70000, "to": 70500, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 160 W PEP cap (caps Full to 160 W); non-interference basis." },
+    { "band": "2m", "from": 144000, "to": 146000, "classes": ["full", "intermediate", "foundation"], "note": "Primary; specific conditions apply within 50 km of Scarborough (TA 012869)." },
+    { "band": "70cm", "from": 430000, "to": 432000, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 40 W ERP cap; 431-432 MHz not available within 100 km of Charing Cross, London." },
+    { "band": "70cm", "from": 432000, "to": 440000, "classes": ["full", "intermediate", "foundation"], "note": "Secondary; 25 W (Foundation) / 100 W (Intermediate) / 400 W (Full); 435-438 MHz is the amateur satellite service segment." },
+    { "band": "23cm", "from": 1240000, "to": 1325000, "classes": ["full", "intermediate"], "note": "Secondary; not allocated to Foundation; 1260-1270 MHz satellite uplink (Earth-to-space) only; Full 400 W / Intermediate 100 W." }
+  ]
+}

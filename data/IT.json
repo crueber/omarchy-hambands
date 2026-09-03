@@ -1,0 +1,366 @@
+{
+  "id": "IT",
+  "name": "Italy",
+  "ituRegion": 1,
+  "regulator": {
+    "name": "Ministero delle Imprese e del Made in Italy (MIMIT) - Direzione generale per i servizi territoriali",
+    "document": "Decreto 5 ottobre 2018, Piano nazionale di ripartizione delle frequenze tra 0 e 3.000 GHz (G.U. Serie Generale n. 244 del 19/10/2018, Supplemento ordinario n. 49) plus Allegato 26 al Codice delle comunicazioni elettroniche; DM 26 gennaio 2026 introduces the classe N patent (G.U. n. 51 del 3/3/2026)",
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2018/10/19/244/so/49/sg/pdf",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "it-pnrf",
+    "name": "Piano Nazionale di Ripartizione delle Frequenze (DM 5 ottobre 2018) - Tabella di attribuzione",
+    "url": "https://www.gazzettaufficiale.it/eli/gu/2018/10/19/244/so/49/sg/pdf",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    {
+      "id": "a",
+      "name": "Classe A (full HAREC privileges)"
+    },
+    {
+      "id": "n",
+      "name": "Classe N (novizio / novice)"
+    }
+  ],
+  "note": "The old classe B was unified into the single classe A by DM 21 July 2005 (G.U. n. 196 del 24/8/2005), which holds full HAREC privileges: all amateur and amateur-satellite bands attributed in the PNRF, with up to 500 W PEP under Allegato 26 (less on LF and 60 m: 1 W EIRP on 2200 m/630 m, 15 W EIRP on 60 m, per PNRF footnotes 8/16/32B). The classe N patent (radioamatore novizio, CEPT ECC/REC (05)06 level) was introduced by DM 26 January 2026 (G.U. n. 51 del 3/3/2026), which fixes the exam criteria (written or oral test, 60% pass mark); the operating privileges (band segments and power) for classe N are left to a decreto direttoriale amending Allegato 26 that was still pending as of retrieval, with MIMIT stating that 'fino all'adozione dei decreti direttoriali ... continuano ad applicarsi le disposizioni vigenti'. Consequently no band segment is assigned to classe N here, and none of the segments below are available to N holders until that decree lands. Band edges and status below are transcribed from the PNRF allocation table (class A / general authorisation); rows where 'Radioamatore' appears only as a utilisation of another service are marked secondary. Notable deviations from the IARU R1 baseline: 160 m is 1830-1850 kHz only (1810-1830 kHz is not attributed to the amateur service in the PNRF 2018; earlier temporary experimental authorisations for 1810-1830 kHz have lapsed pending renewal); 2 m is exclusive amateur 144.0-145.8 MHz and exclusive amateur-satellite 145.8-146.0 MHz (PNRF footnote 69); on 70 cm the amateur service is listed 430-436 MHz (secondary, shared with military radiolocation, with 435-436 MHz the named RADIOAMATORE row) plus 436-438 MHz amateur-satellite only, while 438-440 MHz is not attributed to amateurs; on 23 cm the amateur service appears at 1240-1245 MHz and 1270-1298 MHz (secondary) with 1260-1270 MHz amateur-satellite, while 1245-1260 MHz and 1298-1300 MHz are not attributed.",
+  "bands": [
+    {
+      "band": "2200m",
+      "from": 135.7,
+      "to": 137.8,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary; max 1 W EIRP (RR 5.67A / PNRF footnote 8)"
+    },
+    {
+      "band": "630m",
+      "from": 472,
+      "to": 479,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary; max 1 W EIRP (RR 5.80A as adopted in PNRF footnote 16)"
+    },
+    {
+      "band": "160m",
+      "from": 1830,
+      "to": 1850,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; 1810-1830 kHz not attributed to amateurs in the PNRF 2018 (former temporary experimental authorisations lapsed)"
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3800,
+      "classes": [
+        "a"
+      ],
+      "note": "primary (listed as utilisation of the 3500-3800 kHz FISSO row)"
+    },
+    {
+      "band": "60m",
+      "from": 5351.5,
+      "to": 5366.5,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary; max 15 W EIRP (RR 5.133B / PNRF footnote 32B)"
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7200,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; 7000-7100 kHz also amateur-satellite"
+    },
+    {
+      "band": "30m",
+      "from": 10100,
+      "to": 10150,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (utilisation of the 10100-10150 kHz FISSO row)"
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14250,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; also amateur-satellite"
+    },
+    {
+      "band": "20m",
+      "from": 14250,
+      "to": 14350,
+      "classes": [
+        "a"
+      ],
+      "note": "primary"
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; also amateur-satellite"
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; also amateur-satellite"
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; also amateur-satellite"
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": [
+        "a"
+      ],
+      "note": "primary; also amateur-satellite"
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 52000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary within the 47-52.5 MHz MOBILE TERRESTRE (Min. difesa) row; PNRF footnote 57, based on RR 4.4"
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 145800,
+      "classes": [
+        "a"
+      ],
+      "note": "exclusive amateur use (PNRF footnote 69)"
+    },
+    {
+      "band": "2m",
+      "from": 145800,
+      "to": 146000,
+      "classes": [
+        "a"
+      ],
+      "note": "exclusive amateur-satellite use, limited to links with ITU-compliant amateur satellites (PNRF footnote 69)"
+    },
+    {
+      "band": "70cm",
+      "from": 430000,
+      "to": 435000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation in the FISSO/radiolocation rows); shared with military radiolocation"
+    },
+    {
+      "band": "70cm",
+      "from": 435000,
+      "to": 436000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (with amateur-satellite); shared with military radiolocation"
+    },
+    {
+      "band": "70cm",
+      "from": 436000,
+      "to": 438000,
+      "classes": [
+        "a"
+      ],
+      "note": "amateur-satellite only (secondary); terrestrial amateur use not attributed; 438-440 MHz not attributed to amateurs at all"
+    },
+    {
+      "band": "23cm",
+      "from": 1240000,
+      "to": 1245000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore, PNRF footnote 116) among primary services"
+    },
+    {
+      "band": "23cm",
+      "from": 1260000,
+      "to": 1270000,
+      "classes": [
+        "a"
+      ],
+      "note": "amateur-satellite only (Earth-to-space, secondary); 1245-1260 MHz not attributed to amateurs"
+    },
+    {
+      "band": "23cm",
+      "from": 1270000,
+      "to": 1298000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore, PNRF footnote 116A); 1298-1300 MHz not attributed to amateurs"
+    },
+    {
+      "band": "13cm",
+      "from": 2400000,
+      "to": 2450000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation 2400-2440 and 2440-2450 MHz rows); shared with ISM/SRD"
+    },
+    {
+      "band": "5cm",
+      "from": 5760000,
+      "to": 5770000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row, shared with radiolocation; no protection vs foreign satellite Earth stations (PNRF footnote 193)"
+    },
+    {
+      "band": "5cm",
+      "from": 5830000,
+      "to": 5850000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation, incl. amateur-satellite Earth-to-space)"
+    },
+    {
+      "band": "3cm",
+      "from": 10300000,
+      "to": 10450000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation)"
+    },
+    {
+      "band": "3cm",
+      "from": 10450000,
+      "to": 10500000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation, incl. amateur-satellite)"
+    },
+    {
+      "band": "1.2cm",
+      "from": 24000000,
+      "to": 24050000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (also amateur-satellite); shared with ISM/SRD"
+    },
+    {
+      "band": "6mm",
+      "from": 47000000,
+      "to": 47200000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (also amateur-satellite)"
+    },
+    {
+      "band": "4mm",
+      "from": 77500000,
+      "to": 78000000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (also amateur-satellite)"
+    },
+    {
+      "band": "4mm",
+      "from": 78000000,
+      "to": 81000000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation in 78-79 and 79-81 GHz radiolocation rows)"
+    },
+    {
+      "band": "4mm",
+      "from": 81000000,
+      "to": 81500000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (RR 5.561A / PNRF footnote 279)"
+    },
+    {
+      "band": "2.5mm",
+      "from": 122250000,
+      "to": 123000000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation)"
+    },
+    {
+      "band": "2mm",
+      "from": 134000000,
+      "to": 136000000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (also amateur-satellite); shared with radio astronomy"
+    },
+    {
+      "band": "2mm",
+      "from": 136000000,
+      "to": 141000000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation in the radioastronomy/radiolocation row)"
+    },
+    {
+      "band": "1.2mm",
+      "from": 241000000,
+      "to": 248000000,
+      "classes": [
+        "a"
+      ],
+      "note": "secondary (Radioamatore utilisation)"
+    },
+    {
+      "band": "1.2mm",
+      "from": 248000000,
+      "to": 250000000,
+      "classes": [
+        "a"
+      ],
+      "note": "RADIOAMATORE service row (also amateur-satellite); shared with radio astronomy"
+    }
+  ],
+  "classesPendingUse": [
+    "n"
+  ]
+}

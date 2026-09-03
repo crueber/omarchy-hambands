@@ -1,0 +1,52 @@
+{
+  "id": "JP",
+  "name": "Japan",
+  "ituRegion": 3,
+  "regulator": {
+    "name": "Ministry of Internal Affairs and Communications (総務省)",
+    "document": "電波法施行令 (Radio Law Enforcement Order, Cabinet Order No. 245 of 2001) Article 3 (operator privileges); 電波法施行規則 Article 13-2 and 平成21年総務省告示第126号 (bands)",
+    "url": "https://laws.e-gov.go.jp/law/413CO0000000245",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "egov-xml",
+    "name": "e-Gov law XML bulk download (telecom category: 電波法施行令 Art. 3 grade table transcribed verbatim) cross-checked with ja.wikipedia.org 「アマチュア無線の周波数帯」 band-allocation table transcribing 総務省告示第126号",
+    "url": "https://laws.e-gov.go.jp/bulkdownload?file_section=2&category_cd=15&only_xml_flag=true",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    { "id": "first", "name": "第一級アマチュア無線技士 (Amateur First-Class Radio Operator)" },
+    { "id": "second", "name": "第二級アマチュア無線技士 (Amateur Second-Class Radio Operator)" },
+    { "id": "third", "name": "第三級アマチュア無線技士 (Amateur Third-Class Radio Operator)" },
+    { "id": "fourth", "name": "第四級アマチュア無線技士 (Amateur Fourth-Class Radio Operator)" }
+  ],
+  "note": "Japan gates amateur operation by four operator licence grades (第1級–第4級アマチュア無線技士) defined in Cabinet Order (電波法施行令) Art. 3: first class may operate all amateur station equipment with no statutory frequency or power limit (station licence may authorise up to 1 kW); second class adds a 200 W aerial-power cap but no frequency limit; third class is capped at 50 W and may only use frequencies of 18 MHz and above or 8 MHz and below — which excludes the 30 m (10.1–10.5 MHz) and 20 m (14 MHz) bands; fourth class is capped at 10 W on 21–30 MHz and on 8 MHz and below, 20 W above 30 MHz, and is barred from all Morse-code (CW) operation, which in practice also excludes the 30 m band where only telegraphy/narrow-band data is permitted. Several higher-class marine/land/satellite qualifications (総合無線通信士 etc.) carry equivalent amateur privileges by the same order. Actual band edges are set by MIC public notice 平成21年総務省告示第126号 (「アマチュア局が動作することを許される周波数帯」), which could not be machine-fetched from e-Gov; band edges below are transcribed from the Japanese Wikipedia band-allocation table that reproduces that notice, so those edges carry an unverified mark, while the grade frequency/power rules above are verified verbatim from the official e-Gov XML. 135 kHz and 472 kHz allocations are secondary-service with EIRP ≤ 1 W; most bands above 420 MHz are secondary allocations.",
+  "bands": [
+    { "band": "2200m", "from": 135.7, "to": 137.8, "classes": ["first", "second", "third", "fourth"], "modes": ["cw", "data"], "note": "EIRP <= 1 W; secondary service; data limited to emissions <= 200 Hz occupied bandwidth; fourth class capped at 10 W (<= 8 MHz scope); edge unverified (secondary source only)." },
+    { "band": "630m", "from": 472, "to": 479, "classes": ["first", "second", "third", "fourth"], "note": "EIRP <= 1 W; secondary service, must not interfere with aeronautical radio-navigation; fourth class capped at 10 W (<= 8 MHz scope); edge unverified (secondary source only)." },
+    { "band": "160m", "from": 1800, "to": 1875, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; 1810-1825 kHz mainly used for international contacts; edge unverified (secondary source only)." },
+    { "band": "160m", "from": 1907.5, "to": 1912.5, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; domestic-phone segment centred on 1910 kHz; edge unverified (secondary source only)." },
+    { "band": "80m", "from": 3500, "to": 3580, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "80m", "from": 3599, "to": 3612, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "80m", "from": 3662, "to": 3687, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "75m", "from": 3702, "to": 3716, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "75m", "from": 3745, "to": 3777, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "75m", "from": 3791, "to": 3805, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; edge unverified (secondary source only)." },
+    { "band": "40m", "from": 7000, "to": 7200, "classes": ["first", "second", "third", "fourth"], "note": "<= 8 MHz scope: third class <= 50 W, fourth class <= 10 W; extended from 7000-7100 kHz in 2009; edge unverified (secondary source only)." },
+    { "band": "30m", "from": 10100, "to": 10150, "classes": ["first", "second"], "modes": ["cw", "data"], "note": "Telegraphy and narrow-band data only; third and fourth class excluded because 10.1-10.5 MHz is neither >= 18 MHz nor <= 8 MHz in their licence scopes; secondary service; edge unverified (secondary source only)." },
+    { "band": "20m", "from": 14000, "to": 14350, "classes": ["first", "second"], "note": "Third and fourth class excluded (14 MHz outside their licence scopes); edge unverified (secondary source only)." },
+    { "band": "17m", "from": 18068, "to": 18168, "classes": ["first", "second", "third"], "note": "Fourth class excluded (18 MHz band outside its 21-30 MHz / <= 8 MHz scope); third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "15m", "from": 21000, "to": 21450, "classes": ["first", "second", "third", "fourth"], "note": "Fourth class <= 10 W (21-30 MHz scope); third class <= 50 W (>= 18 MHz scope); edge unverified (secondary source only)." },
+    { "band": "12m", "from": 24890, "to": 24990, "classes": ["first", "second", "third", "fourth"], "note": "Fourth class <= 10 W (21-30 MHz scope); third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "10m", "from": 28000, "to": 29700, "classes": ["first", "second", "third", "fourth"], "note": "Only HF band where FM is permitted; repeaters and amateur satellites allowed; fourth class <= 10 W (21-30 MHz scope); third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "6m", "from": 50000, "to": 54000, "classes": ["first", "second", "third", "fourth"], "note": "Fourth class <= 20 W (> 30 MHz scope); third class <= 50 W; EME permitted; edge unverified (secondary source only)." },
+    { "band": "2m", "from": 144000, "to": 146000, "classes": ["first", "second", "third", "fourth"], "note": "Fourth class <= 20 W (> 30 MHz scope); third class <= 50 W; repeaters, satellites and EME permitted; edge unverified (secondary source only)." },
+    { "band": "70cm", "from": 430000, "to": 440000, "classes": ["first", "second", "third", "fourth"], "note": "Fourth class <= 20 W (> 30 MHz scope); third class <= 50 W; 430-440 MHz secondary service; repeaters, satellites and EME permitted; edge unverified (secondary source only)." },
+    { "band": "23cm", "from": 1260000, "to": 1300000, "classes": ["first", "second", "third", "fourth"], "note": "Secondary service; fourth class <= 20 W; third class <= 50 W; repeaters, satellites, EME and ATV permitted; edge unverified (secondary source only)." },
+    { "band": "13cm", "from": 2400000, "to": 2450000, "classes": ["first", "second", "third", "fourth"], "note": "Secondary service inside ISM band (must tolerate ISM interference); fourth class <= 20 W; third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "5cm", "from": 5650000, "to": 5850000, "classes": ["first", "second", "third", "fourth"], "note": "Secondary service; fourth class <= 20 W; third class <= 50 W; 5725-5850 MHz inside ISM band; edge unverified (secondary source only)." },
+    { "band": "3cm", "from": 10000000, "to": 10250000, "classes": ["first", "second", "third", "fourth"], "note": "Secondary service (radar primary); fourth class <= 20 W; third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "3cm", "from": 10450000, "to": 10500000, "classes": ["first", "second", "third", "fourth"], "note": "Secondary service (radar primary); fourth class <= 20 W; third class <= 50 W; edge unverified (secondary source only)." },
+    { "band": "12mm", "from": 24000000, "to": 24050000, "classes": ["first", "second", "third", "fourth"], "note": "Inside ISM band; fourth class <= 20 W; third class <= 50 W; edge unverified (secondary source only)." }
+  ]
+}

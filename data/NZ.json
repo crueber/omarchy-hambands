@@ -1,0 +1,41 @@
+{
+  "id": "NZ",
+  "name": "New Zealand",
+  "ituRegion": 3,
+  "regulator": {
+    "name": "Radio Spectrum Management (RSM), Ministry of Business, Innovation and Employment (MBIE)",
+    "document": "Radiocommunications Regulations (General User Radio Licence for Amateur Radio Operators) Notice 2025 (GURL, licence 409957); PIB 39 covers the General Amateur Operator's Certificate of Competency",
+    "url": "https://gazette.govt.nz/notice/id/2025-go3272",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "nzart",
+    "name": "NZART band plan (maintained by the New Zealand Association of Radio Transmitters on top of the GURL band limits; IARU Region 3-aligned with Region 1-style HF plans)",
+    "url": "https://www.nzart.org.nz/",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    { "id": "general", "name": "General Amateur Operator (General Amateur Operator's Certificate of Competency, GAOC)" }
+  ],
+  "note": "All NZ amateur operators hold the single General Amateur Operator's Certificate of Competency and operate under the blanket GURL for Amateur Radio Operators (current notice 2025, successor to the 2023 notice), so frequency privileges are uniform; the GURL lists band edges and power but imposes no mode restrictions, so the mode-segmented operating practice comes from the NZART band plan (NZART is the band plan maintainer, aligned with IARU Region 3 and Region 1-style HF plans). Maximum power is 30 dBW (1000 W PEP) on all bands except those expressed as e.i.r.p.: 7 dBW (about 5 W e.i.r.p.) on 2200 m, 14 dBW (about 25 W e.i.r.p.) on 630 m, and 11.8 dBW (about 15.1 W e.i.r.p.) on 60 m. Most allocations are shared with other services (secondary in practice: operators must accept interference and not cause it); the GURL excludes beacons, repeaters and fixed links, which are individually licensed. New GAOC holders may not operate between 5 and 25 MHz for their first three months unless they have logged 50 contacts. Visiting operators under CEPT T/R 61-01 or 61-02 may operate for up to 90 days. 80 m extends to 3900 kHz and 40 m to 7300 kHz (Region 3 allocations); the 26.95-27.3 MHz telemetry and 915-928 MHz ISM GURL entries are not normal amateur bands and are omitted.",
+  "bands": [
+    { "band": "2200m", "from": 135.7, "to": 137.8, "classes": ["general"], "note": "Max 7 dBW e.i.r.p. (about 5 W e.i.r.p.); secondary and temporary allocation (GURL conditions 1, 3, 8)" },
+    { "band": "630m", "from": 472, "to": 479, "classes": ["general"], "note": "Max 14 dBW e.i.r.p. (about 25 W e.i.r.p.); secondary (conditions 1, 8)" },
+    { "band": "160m", "from": 1800, "to": 1950, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); shared, must accept interference (condition 1)" },
+    { "band": "80m", "from": 3500, "to": 3900, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); band extends to 3900 kHz (Region 3); condition 1" },
+    { "band": "60m", "from": 5351.5, "to": 5366.5, "classes": ["general"], "note": "Max 11.8 dBW e.i.r.p. (about 15.1 W e.i.r.p.); secondary (conditions 1, 8)" },
+    { "band": "40m", "from": 7000, "to": 7300, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); band extends to 7300 kHz (Region 3); 7100-7300 kHz shared (condition 1); satellite earth-to-space/space-to-earth on parts (conditions 5, 6)" },
+    { "band": "30m", "from": 10100, "to": 10150, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); condition 1" },
+    { "band": "20m", "from": 14000, "to": 14350, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite use on parts (conditions 5, 6)" },
+    { "band": "17m", "from": 18068, "to": 18168, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite use on parts (conditions 5, 6)" },
+    { "band": "15m", "from": 21000, "to": 21450, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite use on parts (conditions 5, 6)" },
+    { "band": "12m", "from": 24890, "to": 24990, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite use on parts (conditions 5, 6)" },
+    { "band": "10m", "from": 28000, "to": 29700, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite use on parts (conditions 5, 6)" },
+    { "band": "6m", "from": 50000, "to": 51000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP)" },
+    { "band": "6m", "from": 51000, "to": 54000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); shared with other services (condition 1)" },
+    { "band": "2m", "from": 144000, "to": 146000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); satellite earth-to-space/space-to-earth on parts (conditions 5, 6)" },
+    { "band": "2m", "from": 146000, "to": 148000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); shared with other services (condition 1)" },
+    { "band": "70cm", "from": 430000, "to": 440000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); shared (condition 1); 435000-438000 kHz also satellite space-to-earth (conditions 5, 6)" },
+    { "band": "23cm", "from": 1240000, "to": 1300000, "classes": ["general"], "note": "Max 30 dBW (1000 W PEP); shared (condition 1); 1260000-1270000 kHz also satellite earth-to-space (condition 5)" }
+  ]
+}

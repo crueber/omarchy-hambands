@@ -1,0 +1,487 @@
+{
+  "id": "BR",
+  "name": "Brazil",
+  "ituRegion": 2,
+  "regulator": {
+    "name": "Agencia Nacional de Telecomunicacoes (ANATEL)",
+    "document": "Ato n. 926, de 1 de fevereiro de 2024 - Requisitos Tecnicos e Operacionais do Servico de Radioamador (Tabela I: COER classes per band; Tabelas II-XXIX: per-band mode segmentation), read together with Ato n. 3.448, de 11 de marco de 2026 - Requisitos Operacionais do Servico de Radioamador",
+    "url": "https://informacoes.anatel.gov.br/legislacao/atos-de-requisitos-tecnicos-de-gestao-do-espectro/2024/1919-ato-926",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "anatel-cartilha-2026",
+    "name": "Cartilha do Servico Radioamador (official ANATEL guidebook, June 2026) - used as the cross-check for class gating, powers and the 60 m / EIRP special conditions; the LABRE/LIGA de Amadores society charts were not needed",
+    "url": "https://www.gov.br/anatel/pt-br/assuntos/noticias/anatel-simplifica-regras-e-fortalece-o-radioamadorismo-no-brasil/cartilha_radioamador.pdf/@@display-file/file",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    {
+      "id": "a",
+      "name": "Classe A"
+    },
+    {
+      "id": "b",
+      "name": "Classe B"
+    },
+    {
+      "id": "c",
+      "name": "Classe C"
+    }
+  ],
+  "bands": [
+    {
+      "band": "2200m",
+      "from": 135.7,
+      "to": 137.8,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "modes": [
+        "cw",
+        "data"
+      ],
+      "note": "Max 1 W EIRP; ACDS (automatic digital stations) allowed provided no interference to point-to-point and DX communication."
+    },
+    {
+      "band": "630m",
+      "from": 472,
+      "to": 479,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "modes": [
+        "cw",
+        "data"
+      ],
+      "note": "Max 5 W EIRP; no protection from (nor interference to) the aeronautical radionavigation service; ACDS conditions apply."
+    },
+    {
+      "band": "160m",
+      "from": 1800,
+      "to": 1850,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Modes segmented per sub-band by Ato 926/2024."
+    },
+    {
+      "band": "160m",
+      "from": 1850,
+      "to": 2000,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3800,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Modes segmented per sub-band (e.g. 3500-3510 CW/DX, 3600-3600 ACDS, 3775-3800 DX)."
+    },
+    {
+      "band": "80m",
+      "from": 3800,
+      "to": 4000,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only (Region 2 80 m extension)."
+    },
+    {
+      "band": "60m",
+      "from": 5351.5,
+      "to": 5354,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data"
+      ],
+      "note": "Class A only; max 25 W EIRP."
+    },
+    {
+      "band": "60m",
+      "from": 5354,
+      "to": 5366,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Class A only; DX segment; max 25 W EIRP."
+    },
+    {
+      "band": "60m",
+      "from": 5366,
+      "to": 5366.5,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data"
+      ],
+      "note": "Class A only; ACDS segment; max 25 W EIRP."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7047,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Modes segmented per sub-band by Ato 926/2024."
+    },
+    {
+      "band": "40m",
+      "from": 7047,
+      "to": 7300,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "note": "Class A and B (Region 2 40 m up to 7300 kHz)."
+    },
+    {
+      "band": "30m",
+      "from": 10100,
+      "to": 10150,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only; modes segmented per sub-band."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21150,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Modes segmented per sub-band."
+    },
+    {
+      "band": "15m",
+      "from": 21150,
+      "to": 21300,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "note": "Class A and B."
+    },
+    {
+      "band": "15m",
+      "from": 21300,
+      "to": 21450,
+      "classes": [
+        "a"
+      ],
+      "note": "Class A only."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "All classes."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Modes segmented per sub-band by Ato 926/2024."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 54000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "DX calling on 50.110 MHz; modes segmented per sub-band."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 148000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "National calling frequency 146.520 MHz; satellite sub-segments per Tabela XV."
+    },
+    {
+      "band": "1.3m",
+      "from": 220000,
+      "to": 225000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "'Faixa de 1,3 metro' (220-225 MHz)."
+    },
+    {
+      "band": "70cm",
+      "from": 430000,
+      "to": 440000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Satellite sub-band 435-438 MHz per Tabela XVII."
+    },
+    {
+      "band": "33cm",
+      "from": 902000,
+      "to": 907500,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "907.5-915 MHz is not allocated to amateurs."
+    },
+    {
+      "band": "33cm",
+      "from": 915000,
+      "to": 928000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "23cm",
+      "from": 1240000,
+      "to": 1300000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "13cm",
+      "from": 2300000,
+      "to": 2450000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Max 100 W EIRP for terrestrial links; ISM sharing."
+    },
+    {
+      "band": "9cm",
+      "from": 3300000,
+      "to": 3500000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "5cm",
+      "from": 5650000,
+      "to": 5925000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "3cm",
+      "from": 10000000,
+      "to": 10500000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "1.2cm",
+      "from": 24000000,
+      "to": 24050000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "1.2cm",
+      "from": 24050000,
+      "to": 24250000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Max 100 W EIRP for terrestrial links."
+    },
+    {
+      "band": "6mm",
+      "from": 47000000,
+      "to": 47200000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": "Max 100 W EIRP for terrestrial links."
+    },
+    {
+      "band": "4mm",
+      "from": 76000000,
+      "to": 77500000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "4mm",
+      "from": 77500000,
+      "to": 78000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "4mm",
+      "from": 78000000,
+      "to": 81500000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "2.5mm",
+      "from": 122250000,
+      "to": 123000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "2mm",
+      "from": 134000000,
+      "to": 136000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "2mm",
+      "from": 136000000,
+      "to": 141000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "1mm",
+      "from": 241000000,
+      "to": 248000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    },
+    {
+      "band": "1mm",
+      "from": 248000000,
+      "to": 250000000,
+      "classes": [
+        "a",
+        "b",
+        "c"
+      ],
+      "note": ""
+    }
+  ],
+  "note": "ANATEL gates the service by COER operator class: Classe C (entry, minimum age 10) is limited to the 'todas as classes' segments of Tabela I of Ato 926/2024 (1800-1850, 3500-3800, 7000-7047, 21000-21150, 24890-24990, 28-29.7, 50-54, 144-148, 220-225, 430-440 MHz and the 33 cm-and-above UHF/SHF bands); Classe B adds the 7047-7300 and 21150-21300 kHz segments; Classe A (advanced exam, or one year as B) alone gets 1850-2000, 3800-4000, 60 m, 30 m, 20 m and 17 m. General power caps are average transmitter output: 1500 W (A), 1000 W (B), 100 W (C), with EIRP caps of 1 W on 2200 m, 5 W on 630 m, 25 W on 60 m and 100 W EIRP on the microwave terrestrial-link bands. Modes are regulated per sub-band segment (Ato 926/2024 Tabelas II-XXIX: CW, Fonia SSB/AM/FM/DV, Modos Digitais, Demais Modos incl. Fac-simile/SSTV/FSTV/Teste); that fine-grained mode map is not transcribed here, so 'modes' are given only where a segment is uniform (2200 m, 630 m, 60 m). Ground truth is Ato 926/2024 Tabela I plus Ato 3.448/2026 (operational requirements) on the ANATEL legislation portal, cross-checked against ANATEL's official June 2026 Cartilha; the society fallback (LABRE/LIGA de Amadores) was not needed."
+}

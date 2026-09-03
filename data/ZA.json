@@ -1,0 +1,582 @@
+{
+  "id": "ZA",
+  "name": "South Africa",
+  "ituRegion": 1,
+  "regulator": {
+    "name": "Independent Communications Authority of South Africa (ICASA)",
+    "document": "Radio Frequency Spectrum Regulations, 2015 - Government Gazette No. 38641, 30 March 2015: Section 23 (Class A / Class B amateur licences), Annexure H (modes of emission) and Annexure I (amateur radio frequency bands)",
+    "url": "https://www.icasa.org.za/uploads/files/Radio-Frequency-Spectrum-Regulations-2015.pdf",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "nrfp-2026",
+    "name": "ICASA National Radio Frequency Plan 2026 (cross-check of statuses, band edges and national footnotes NF0/NF1/NF2/NF8)",
+    "url": "https://www.icasa.org.za/uploads/files/Published-National-Radio-Frequency-Plan-2026.pdf",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    {
+      "id": "a",
+      "name": "Class A (ZS) - HAREC / CEPT Class 1"
+    },
+    {
+      "id": "b",
+      "name": "Class B (ZU) - novice"
+    }
+  ],
+  "bands": [
+    {
+      "band": "2200m",
+      "from": 135.7,
+      "to": 137.8,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; max 1 W EIRP (ITU 5.67A)."
+    },
+    {
+      "band": "630m",
+      "from": 472,
+      "to": 479,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; 5 W EIRP per Annexure I (WRC-12 band, GG 354 of 2013); no protection from aeronautical radionavigation (5.80A/5.80B)."
+    },
+    {
+      "band": "160m",
+      "from": 1810,
+      "to": 2000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW (1 kW PEP); Annexure I states 'No Class B operation'."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3800,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Co-primary; Class A 30 dBW, Class B 20 dBW (100 W PEP); music transmission permitted."
+    },
+    {
+      "band": "60m",
+      "from": 5350,
+      "to": 5450,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary under NRFP 2026 footnote NF0 (ITU Art. 4.4); the channel 5290 kHz is also authorized. Neither NRFP 2026 nor RFSR 2015 Annexure I states class gating or a maximum power for this band - unverified."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7200,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW, Class B 20 dBW; amateur-satellite allocated."
+    },
+    {
+      "band": "30m",
+      "from": 10100,
+      "to": 10150,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; Class A 26 dBW (400 W PEP); 'No Class B operation'."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW; amateur-satellite allocated; no Class B."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW; no Class B."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW; satellite allocated; no Class B."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW; no Class B."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 28050,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Part of the primary 28.000-29.700 MHz allocation; Class A 30 dBW."
+    },
+    {
+      "band": "10m",
+      "from": 28050,
+      "to": 28150,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Class B segment (20 dBW) inside the primary 28-29.7 MHz band; Class A 30 dBW."
+    },
+    {
+      "band": "10m",
+      "from": 28150,
+      "to": 28300,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Class A 30 dBW."
+    },
+    {
+      "band": "10m",
+      "from": 28300,
+      "to": 28500,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Class B segment (20 dBW); Class A 30 dBW."
+    },
+    {
+      "band": "10m",
+      "from": 28500,
+      "to": 29700,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Class A 30 dBW."
+    },
+    {
+      "band": "10m",
+      "from": 29700,
+      "to": 30000,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary (footnote NF1); disaster exercises and emergency use only; 26 dBW; 'All' emission types."
+    },
+    {
+      "band": "8m",
+      "from": 40675,
+      "to": 40685,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; 26 dBW; propagation studies / beacons only."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 54000,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary in South Africa (5.169); 50-52 MHz 30 dBW, 53-54 MHz 26 dBW; music transmission permitted."
+    },
+    {
+      "band": "4m",
+      "from": 70000,
+      "to": 70300,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary (footnote NF2); explicitly marked Class A, 26 dBW; experimental propagation; channels 70.025-70.150 MHz reserved for civil defence."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 146000,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 30 dBW, Class B 20 dBW; satellite allocated."
+    },
+    {
+      "band": "70cm",
+      "from": 430000,
+      "to": 440000,
+      "classes": [
+        "a",
+        "b"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Co-primary; Class A 30 dBW, Class B 20 dBW; satellite sub-band 435-438 MHz (B 20 dBW); 433.05-434.79 MHz is ISM/SRD - amateurs neither claim nor grant protection (footnote NF8)."
+    },
+    {
+      "band": "23cm",
+      "from": 1240000,
+      "to": 1300000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; Class A 30 dBW; music permitted; amateur-satellite 1260-1270 MHz (5.282)."
+    },
+    {
+      "band": "13cm",
+      "from": 2300000,
+      "to": 2450000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing (must accept interference); Class A 26 dBW."
+    },
+    {
+      "band": "9cm",
+      "from": 3300000,
+      "to": 3500000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing; Class A 26 dBW."
+    },
+    {
+      "band": "5cm",
+      "from": 5650000,
+      "to": 5925000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing; Class A 26 dBW; satellite allocated."
+    },
+    {
+      "band": "3cm",
+      "from": 10000000,
+      "to": 10450000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; Class A 26 dBW; all modes including pulse."
+    },
+    {
+      "band": "3cm",
+      "from": 10450000,
+      "to": 10500000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; Class A 26 dBW; all modes including pulse."
+    },
+    {
+      "band": "1.2cm",
+      "from": 24000000,
+      "to": 24050000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 26 dBW; satellite allocated; pulse permitted."
+    },
+    {
+      "band": "1.2cm",
+      "from": 24050000,
+      "to": 24250000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing; Class A 26 dBW; pulse permitted."
+    },
+    {
+      "band": "6mm",
+      "from": 47000000,
+      "to": 47200000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 26 dBW; satellite allocated; pulse permitted."
+    },
+    {
+      "band": "4mm",
+      "from": 75500000,
+      "to": 76000000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 26 dBW; pulse permitted."
+    },
+    {
+      "band": "4mm",
+      "from": 76000000,
+      "to": 81000000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing; Class A 26 dBW; pulse permitted."
+    },
+    {
+      "band": "2.5mm",
+      "from": 122250000,
+      "to": 123000000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary, ISM sharing; Class A 26 dBW; pulse permitted."
+    },
+    {
+      "band": "2mm",
+      "from": 134000000,
+      "to": 136000000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Primary; Class A 26 dBW; pulse permitted."
+    },
+    {
+      "band": "2mm",
+      "from": 136000000,
+      "to": 141000000,
+      "classes": [
+        "a"
+      ],
+      "modes": [
+        "cw",
+        "data",
+        "phone",
+        "image"
+      ],
+      "note": "Secondary; Class A 26 dBW; pulse permitted."
+    }
+  ],
+  "note": "ICASA issues Class-A (ZS, requires HAREC/CEPT Class 1) and Class-B (ZU novice, issued to persons up to age 20 who must pass the Class-A exam before their 25th birthday or lose the licence) amateur licences; Class A may use every band of Annexure I, while Class B is limited to the rows explicitly marked 'B' (80 m, 40 m, 10 m sub-segments 28.050-28.150/28.300-28.500, 2 m and 70 cm at 20 dBW) plus the rows carrying no per-class power label (2200 m, 630 m, 60 m, 29.7-30 MHz, 8 m, 6 m), which the ICASA radio-amateur examination syllabus likewise lists as Class-B must-know allocations; Class B has no access to 160 m, 30 m, 20 m, 17 m, 15 m, 12 m, 4 m or any 23 cm-and-above band. Modes: 'All except pulse or fast scan TV' (Annexure H) on every band except 29.7-30 MHz where 'All' applies; pulse emissions appear only on the microwave rows. Powers above are PEP expressed in dBW relative to 1 W (30 dBW = 1 kW, 26 dBW = 400 W, 20 dBW = 100 W). Ground truth is the regulator's own Radio Frequency Spectrum Regulations 2015 (GG 38641) Annexure I, cross-checked against the National Radio Frequency Plan 2026 (which defers to Annexure I for amateur conditions); the SARL band-plan pages (sarl.org.za) were down during retrieval (default-webpage/404) so the society fallback could not be used."
+}

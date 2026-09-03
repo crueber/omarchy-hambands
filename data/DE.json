@@ -1,0 +1,377 @@
+{
+  "id": "DE",
+  "name": "Germany",
+  "ituRegion": 1,
+  "regulator": {
+    "name": "Bundesnetzagentur für Elektrizität, Gas, Telekommunikation, Post und Eisenbahnen (BNetzA)",
+    "document": "Amateurfunkverordnung (AFuV) 2005, Anlage 1 — Nutzungsbedingungen für die im Frequenzplan für den Amateurfunkdienst ausgewiesenen Frequenzbereiche (BGBl. 2024 I Nr. 175, S. 1–4)",
+    "url": "https://www.gesetze-im-internet.de/afuv_2005/anlage_1.html",
+    "retrieved": "2026-09"
+  },
+  "source": {
+    "id": "gesetze-im-internet-afuv",
+    "name": "gesetze-im-internet.de — AFuV Anlage 1 (official consolidated text)",
+    "url": "https://www.gesetze-im-internet.de/afuv_2005/anlage_1.html",
+    "retrieved": "2026-09"
+  },
+  "classes": [
+    { "id": "a", "name": "Klasse A" },
+    { "id": "e", "name": "Klasse E" },
+    { "id": "n", "name": "Klasse N" }
+  ],
+  "note": "Access is gated by three licence classes defined in AFuV Anlage 1: Klasse A (full privileges, up to 750 W PEP on primary HF/VHF/UHF allocations), Klasse E (entry class added 2020, 100 W PEP on 160m/80m/15m/10m and 75 W PEP on 2m/70cm/23cm), and Klasse N (added 2024 for young entrants without full examination: 10 W ERP on 10m and 6.1 W ERP on 2m/70cm). The AFuV restricts maximum occupied bandwidth per band (800 Hz on 2200m/630m, 2.7 kHz on 160m–12m HF, 7 kHz below 29 MHz on 10m, 12 kHz on 6m, 40 kHz on 2m, 2 MHz on 70cm/23cm, 10 MHz above 2.3 GHz) rather than naming modes; the 'modes' fields below are derived from those bandwidth limits. Key deviations: on 160m (1810–2000 kHz) weekend power is raised to 750 W PEP (A) / 100 W PEP (E) and contests are permitted on weekends only (NB 15); the 1850–2000 kHz sub-bands, 30m and 2200m bar remote-controlled stations and contests; 6m (50–52 MHz) is restricted to fixed stations with horizontal polarisation and no interference to wind-profiler radars; 1247–1263 MHz (23cm, Galileo/radio-navigation protection) is capped at 3.05 W ERP; remote-controlled and automatically operating stations above 30 MHz are limited to 50 W ERP (except remote operation); 2200m and 630m are available to Klasse A only at 1 W ERP. Status column: P = primary, S = secondary (several segments are shared primary with other services).",
+  "bands": [
+    {
+      "band": "2200m",
+      "from": 135.7,
+      "to": 137.8,
+      "classes": ["a"],
+      "modes": ["cw", "data"],
+      "note": "Klasse A only: 1 W ERP. Secondary. Max occupied bandwidth 800 Hz (NB 1). Remote-controlled stations and contests not permitted (NB 2, 10)."
+    },
+    {
+      "band": "630m",
+      "from": 472,
+      "to": 479,
+      "classes": ["a"],
+      "modes": ["cw", "data"],
+      "note": "Klasse A only: 1 W ERP. Secondary. Max occupied bandwidth 800 Hz (NB 1)."
+    },
+    {
+      "band": "160m",
+      "from": 1810,
+      "to": 1850,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 100 W PEP. Primary. Max occupied bandwidth 2.7 kHz (NB 3)."
+    },
+    {
+      "band": "160m",
+      "from": 1850,
+      "to": 1890,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Secondary. A: 75 W PEP; E: 75 W PEP; weekends 750 W PEP (A) / 100 W PEP (E) (NB 15). No remote-controlled stations, no contests (NB 10). Max bandwidth 2.7 kHz."
+    },
+    {
+      "band": "160m",
+      "from": 1890,
+      "to": 2000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Secondary. A: 10 W PEP; E: 10 W PEP; weekends 750 W PEP (A) / 100 W PEP (E) (NB 15). No remote-controlled stations, no contests (NB 10). Max bandwidth 2.7 kHz."
+    },
+    {
+      "band": "80m",
+      "from": 3500,
+      "to": 3800,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 100 W PEP. Primary. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "60m",
+      "from": 5351.5,
+      "to": 5366.5,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 9.14 W ERP. Secondary. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "40m",
+      "from": 7000,
+      "to": 7200,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 750 W PEP. Primary; 7000–7100 kHz also primary for amateur satellite. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "30m",
+      "from": 10100,
+      "to": 10150,
+      "classes": ["a"],
+      "modes": ["cw", "data"],
+      "note": "Klasse A only: 150 W PEP. Secondary. No remote-controlled stations, no contests (NB 10). Max occupied bandwidth 2.7 kHz (2.7 kHz and the small segment effectively confine operation to CW/data)."
+    },
+    {
+      "band": "20m",
+      "from": 14000,
+      "to": 14350,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 750 W PEP. Primary; 14000–14250 kHz also primary for amateur satellite. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "17m",
+      "from": 18068,
+      "to": 18168,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 750 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "15m",
+      "from": 21000,
+      "to": 21450,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 100 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "12m",
+      "from": 24890,
+      "to": 24990,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 750 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 2.7 kHz."
+    },
+    {
+      "band": "10m",
+      "from": 28000,
+      "to": 29700,
+      "classes": ["a", "e", "n"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 100 W PEP; N: 10 W ERP. Primary; also primary for amateur satellite. Max occupied bandwidth 7 kHz below 29 MHz, 40 kHz above 29 MHz (NB 4)."
+    },
+    {
+      "band": "6m",
+      "from": 50000,
+      "to": 50400,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 750 W PEP. Secondary. Fixed stations only, horizontal polarisation exclusively; no interference to wind-profiler radars, no protection from them (NB 5). Max occupied bandwidth 12 kHz."
+    },
+    {
+      "band": "6m",
+      "from": 50400,
+      "to": 52000,
+      "classes": ["a"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "Klasse A only: 25 W PEP. Secondary. Same 50 MHz restrictions as 50–50.4 MHz: fixed stations, horizontal polarisation, no wind-profiler interference (NB 5). Max occupied bandwidth 12 kHz."
+    },
+    {
+      "band": "2m",
+      "from": 144000,
+      "to": 146000,
+      "classes": ["a", "e", "n"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 75 W PEP; N: 6.1 W ERP. Primary; also primary for amateur satellite. Max occupied bandwidth 40 kHz."
+    },
+    {
+      "band": "70cm",
+      "from": 430000,
+      "to": 440000,
+      "classes": ["a", "e", "n"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 75 W PEP; N: 6.1 W ERP. Primary. Amateur satellite secondary in 435–438 MHz. Max occupied bandwidth 2 MHz (7 MHz for amplitude-modulated television)."
+    },
+    {
+      "band": "23cm",
+      "from": 1240000,
+      "to": 1250000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 75 W PEP. Secondary. Max occupied bandwidth 2 MHz (18 MHz FM TV). Cap of 3.05 W ERP applies in the 1247–1263 MHz sub-range (NB 11)."
+    },
+    {
+      "band": "23cm",
+      "from": 1250000,
+      "to": 1260000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 75 W PEP. Secondary. Max occupied bandwidth 2 MHz. Cap of 3.05 W ERP applies in the 1247–1263 MHz sub-range (NB 11)."
+    },
+    {
+      "band": "23cm",
+      "from": 1260000,
+      "to": 1300000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 750 W PEP; E: 75 W PEP. Secondary. Max occupied bandwidth 2 MHz. Cap of 3.05 W ERP applies in the 1247–1263 MHz sub-range (NB 11); 1260–1270 MHz usable for amateur satellite (earth-to-space only), other secondary services preferred in satellite use."
+    },
+    {
+      "band": "13cm",
+      "from": 2320000,
+      "to": 2400000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz (20 MHz TV)."
+    },
+    {
+      "band": "13cm",
+      "from": 2400000,
+      "to": 2450000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 2400–2450 MHz also secondary for amateur satellite (other secondary services preferred in satellite use). Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "9cm",
+      "from": 3400000,
+      "to": 3475000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6cm",
+      "from": 5650000,
+      "to": 5670000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 5650–5670 MHz also secondary for amateur satellite, earth-to-space only, other secondary services preferred (NB 13). Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6cm",
+      "from": 5670000,
+      "to": 5725000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6cm",
+      "from": 5725000,
+      "to": 5755000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6cm",
+      "from": 5755000,
+      "to": 5830000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6cm",
+      "from": 5830000,
+      "to": 5850000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 5830–5850 MHz also secondary for amateur satellite, space-to-earth only. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "3cm",
+      "from": 10000000,
+      "to": 10400000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "3cm",
+      "from": 10400000,
+      "to": 10450000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "3cm",
+      "from": 10450000,
+      "to": 10500000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 10450–10500 MHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "12mm",
+      "from": 24000000,
+      "to": 24050000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "12mm",
+      "from": 24050000,
+      "to": 24250000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "6mm",
+      "from": 47000000,
+      "to": 47200000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "4mm",
+      "from": 76000000,
+      "to": 77500000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 76–81 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "4mm",
+      "from": 77500000,
+      "to": 78000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 76–81 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "4mm",
+      "from": 78000000,
+      "to": 79000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 76–81 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "4mm",
+      "from": 79000000,
+      "to": 81000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 76–81 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "2.5mm",
+      "from": 122250000,
+      "to": 123000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "2mm",
+      "from": 134000000,
+      "to": 136000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "2mm",
+      "from": 136000000,
+      "to": 141000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 136–141 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "1mm",
+      "from": 241000000,
+      "to": 248000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Secondary; 241–248 GHz also secondary for amateur satellite. Max occupied bandwidth 10 MHz."
+    },
+    {
+      "band": "1mm",
+      "from": 248000000,
+      "to": 250000000,
+      "classes": ["a", "e"],
+      "modes": ["cw", "data", "phone", "image"],
+      "note": "A: 75 W PEP; E: 5 W PEP. Primary; also primary for amateur satellite. Max occupied bandwidth 10 MHz."
+    }
+  ]
+}
