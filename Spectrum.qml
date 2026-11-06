@@ -115,6 +115,7 @@ Column {
 
           Rectangle {
             id: seg
+            required property int index
             required property var modelData
             readonly property bool allowed: root.selectedClass === ""
               || (modelData.classes && modelData.classes.indexOf(root.selectedClass) >= 0)
